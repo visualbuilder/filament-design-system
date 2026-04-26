@@ -4,6 +4,21 @@ All notable changes to `visualbuilder/filament-design-system` will be documented
 
 ## Unreleased
 
+### v0.4.0
+
+- **`generate_palette` tool** — synthesises an 11-shade ramp (50→950) from a
+  single hex seed. Anchored at 500 by default; pass `anchor` to position the
+  seed elsewhere on the curve. Read-only; chain into `write_tokens` to apply.
+  Backed by a Tailwind-ish HSL lightness curve with saturation roll-off at
+  the pale and inky ends.
+- **`set_brand_logo` tool** — sets `panel.brand.{logo|logo_dark|favicon}` from
+  a URL (fetched server-side), data URI (decoded), or existing public/ path.
+  Fetched assets are saved under `public/design-system/brand/` with a
+  content-hash suffix. Allowed extensions: svg, png, jpg, jpeg, webp, ico.
+  2MB cap on fetched/decoded payloads.
+- Server bumped to 0.4.0; instructions reworked to teach the chained
+  generate_palette → write_tokens flow and the new brand-asset workflow.
+
 ### v0.3.1
 
 - **Panel chrome editable via MCP.** Overlay JSON shape extended to
