@@ -1,0 +1,1932 @@
+{
+    "generated_at": "2026-04-26T15:33:58+01:00",
+    "filament_version": "v5.6.0",
+    "pages": [
+        "overview",
+        "forms",
+        "layout",
+        "actions",
+        "tables",
+        "card-tables",
+        "infolists",
+        "icons"
+    ],
+    "classes": {
+        "ds-icon-preview-svg": [
+            "icons"
+        ],
+        "ds-page": [
+            "overview"
+        ],
+        "ds-radius-cell": [
+            "overview"
+        ],
+        "ds-radius-cell__name": [
+            "overview"
+        ],
+        "ds-radius-cell__shape": [
+            "overview"
+        ],
+        "ds-radius-grid": [
+            "overview"
+        ],
+        "ds-section": [
+            "overview"
+        ],
+        "ds-section__group-label": [
+            "overview"
+        ],
+        "ds-section__head": [
+            "overview"
+        ],
+        "ds-section__sub": [
+            "overview"
+        ],
+        "ds-section__title": [
+            "overview"
+        ],
+        "ds-space-row": [
+            "overview"
+        ],
+        "ds-space-row__bar": [
+            "overview"
+        ],
+        "ds-space-row__num": [
+            "overview"
+        ],
+        "ds-space-row__tag": [
+            "overview"
+        ],
+        "ds-swatch": [
+            "overview"
+        ],
+        "ds-swatch-grid": [
+            "overview"
+        ],
+        "ds-swatch__hex": [
+            "overview"
+        ],
+        "ds-swatch__label": [
+            "overview"
+        ],
+        "ds-swatch__meta": [
+            "overview"
+        ],
+        "ds-swatch__tile": [
+            "overview"
+        ],
+        "ds-tokens": [
+            "overview"
+        ],
+        "ds-tokens__col-swatch": [
+            "overview"
+        ],
+        "ds-tokens__swatch": [
+            "overview"
+        ],
+        "ds-two-col": [
+            "overview"
+        ],
+        "ds-type-row": [
+            "overview"
+        ],
+        "fi-ac": [
+            "forms",
+            "layout",
+            "actions"
+        ],
+        "fi-ac-btn-action": [
+            "forms",
+            "layout",
+            "actions",
+            "tables"
+        ],
+        "fi-ac-btn-group": [
+            "tables"
+        ],
+        "fi-ac-grouped-action": [
+            "actions",
+            "tables"
+        ],
+        "fi-ac-icon-btn-action": [
+            "forms",
+            "actions",
+            "tables",
+            "card-tables",
+            "icons"
+        ],
+        "fi-ac-icon-btn-group": [
+            "actions"
+        ],
+        "fi-ac-link-action": [
+            "forms",
+            "actions",
+            "tables"
+        ],
+        "fi-active": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-align-center": [
+            "card-tables",
+            "icons"
+        ],
+        "fi-align-end": [
+            "layout",
+            "tables"
+        ],
+        "fi-align-right": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-align-start": [
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "icons"
+        ],
+        "fi-aside": [
+            "layout"
+        ],
+        "fi-autosizable": [
+            "forms"
+        ],
+        "fi-avatar": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-badge": [
+            "forms",
+            "layout",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-badge-delete-btn": [
+            "forms"
+        ],
+        "fi-badge-label": [
+            "forms",
+            "layout",
+            "icons"
+        ],
+        "fi-badge-label-ctn": [
+            "forms",
+            "layout",
+            "icons"
+        ],
+        "fi-bg-color-400": [
+            "forms",
+            "layout",
+            "actions"
+        ],
+        "fi-bg-color-600": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-body": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-body-has-navigation": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-body-has-topbar": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-btn": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-bulleted": [
+            "infolists"
+        ],
+        "fi-callout": [
+            "layout"
+        ],
+        "fi-callout-description": [
+            "layout"
+        ],
+        "fi-callout-heading": [
+            "layout"
+        ],
+        "fi-callout-icon": [
+            "layout"
+        ],
+        "fi-callout-main": [
+            "layout"
+        ],
+        "fi-callout-text": [
+            "layout"
+        ],
+        "fi-checkbox-input": [
+            "forms",
+            "tables",
+            "card-tables",
+            "icons"
+        ],
+        "fi-circular": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-collapsible": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-color": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-color-danger": [
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-color-gray": [
+            "card-tables"
+        ],
+        "fi-color-info": [
+            "layout",
+            "actions",
+            "infolists"
+        ],
+        "fi-color-primary": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-color-success": [
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists"
+        ],
+        "fi-color-warning": [
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-compact": [
+            "layout",
+            "tables",
+            "icons"
+        ],
+        "fi-contained": [
+            "layout",
+            "infolists"
+        ],
+        "fi-copyable": [
+            "tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-disabled": [
+            "forms",
+            "layout",
+            "actions",
+            "icons"
+        ],
+        "fi-dropdown": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-dropdown-header": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-dropdown-list": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-dropdown-list-item": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-dropdown-list-item-label": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-dropdown-panel": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-dropdown-trigger": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-fieldset": [
+            "layout"
+        ],
+        "fi-fixed-positioning-context": [
+            "tables",
+            "card-tables",
+            "icons"
+        ],
+        "fi-fo-builder": [
+            "forms"
+        ],
+        "fi-fo-builder-actions": [
+            "forms"
+        ],
+        "fi-fo-builder-block-picker": [
+            "forms"
+        ],
+        "fi-fo-checkbox-list": [
+            "forms"
+        ],
+        "fi-fo-checkbox-list-option": [
+            "forms"
+        ],
+        "fi-fo-checkbox-list-option-ctn": [
+            "forms"
+        ],
+        "fi-fo-checkbox-list-option-label": [
+            "forms"
+        ],
+        "fi-fo-checkbox-list-option-text": [
+            "forms"
+        ],
+        "fi-fo-checkbox-list-options": [
+            "forms"
+        ],
+        "fi-fo-color-picker": [
+            "forms"
+        ],
+        "fi-fo-color-picker-panel": [
+            "forms"
+        ],
+        "fi-fo-color-picker-preview": [
+            "forms"
+        ],
+        "fi-fo-date-time-picker": [
+            "forms"
+        ],
+        "fi-fo-field": [
+            "forms",
+            "layout",
+            "tables",
+            "card-tables"
+        ],
+        "fi-fo-field-content-col": [
+            "forms",
+            "layout",
+            "tables",
+            "card-tables"
+        ],
+        "fi-fo-field-label": [
+            "forms",
+            "layout",
+            "tables",
+            "card-tables"
+        ],
+        "fi-fo-field-label-col": [
+            "forms",
+            "layout",
+            "tables",
+            "card-tables"
+        ],
+        "fi-fo-field-label-content": [
+            "forms",
+            "layout",
+            "tables",
+            "card-tables"
+        ],
+        "fi-fo-field-label-ctn": [
+            "forms",
+            "layout",
+            "tables",
+            "card-tables"
+        ],
+        "fi-fo-field-label-required-mark": [
+            "forms",
+            "layout"
+        ],
+        "fi-fo-file-upload": [
+            "forms"
+        ],
+        "fi-fo-file-upload-avatar": [
+            "forms"
+        ],
+        "fi-fo-file-upload-error-message": [
+            "forms"
+        ],
+        "fi-fo-file-upload-input-ctn": [
+            "forms"
+        ],
+        "fi-fo-key-value": [
+            "forms"
+        ],
+        "fi-fo-key-value-add-action-ctn": [
+            "forms"
+        ],
+        "fi-fo-key-value-table": [
+            "forms"
+        ],
+        "fi-fo-key-value-table-ctn": [
+            "forms"
+        ],
+        "fi-fo-key-value-wrp": [
+            "forms"
+        ],
+        "fi-fo-markdown-editor": [
+            "forms"
+        ],
+        "fi-fo-radio": [
+            "forms"
+        ],
+        "fi-fo-radio-label": [
+            "forms"
+        ],
+        "fi-fo-radio-label-text": [
+            "forms"
+        ],
+        "fi-fo-repeater": [
+            "forms"
+        ],
+        "fi-fo-repeater-actions": [
+            "forms"
+        ],
+        "fi-fo-repeater-add": [
+            "forms"
+        ],
+        "fi-fo-rich-editor": [
+            "forms"
+        ],
+        "fi-fo-rich-editor-content": [
+            "forms"
+        ],
+        "fi-fo-rich-editor-custom-blocks-ctn": [
+            "forms"
+        ],
+        "fi-fo-rich-editor-file-validation-message": [
+            "forms"
+        ],
+        "fi-fo-rich-editor-floating-toolbar": [
+            "forms"
+        ],
+        "fi-fo-rich-editor-main": [
+            "forms"
+        ],
+        "fi-fo-rich-editor-merge-tags-list": [
+            "forms"
+        ],
+        "fi-fo-rich-editor-panel": [
+            "forms"
+        ],
+        "fi-fo-rich-editor-panel-close-btn-ctn": [
+            "forms"
+        ],
+        "fi-fo-rich-editor-panel-header": [
+            "forms"
+        ],
+        "fi-fo-rich-editor-panel-heading": [
+            "forms"
+        ],
+        "fi-fo-rich-editor-panels": [
+            "forms"
+        ],
+        "fi-fo-rich-editor-tool": [
+            "forms"
+        ],
+        "fi-fo-rich-editor-toolbar": [
+            "forms"
+        ],
+        "fi-fo-rich-editor-toolbar-group": [
+            "forms"
+        ],
+        "fi-fo-rich-editor-uploading-file-message": [
+            "forms"
+        ],
+        "fi-fo-select": [
+            "forms",
+            "layout",
+            "tables"
+        ],
+        "fi-fo-select-native": [
+            "forms"
+        ],
+        "fi-fo-select-wrp": [
+            "forms",
+            "layout",
+            "tables"
+        ],
+        "fi-fo-tags-input": [
+            "forms"
+        ],
+        "fi-fo-tags-input-tags-ctn": [
+            "forms"
+        ],
+        "fi-fo-tags-input-wrp": [
+            "forms"
+        ],
+        "fi-fo-text-input": [
+            "forms",
+            "layout"
+        ],
+        "fi-fo-textarea": [
+            "forms",
+            "layout"
+        ],
+        "fi-fo-textarea-wrp": [
+            "forms",
+            "layout"
+        ],
+        "fi-fo-toggle": [
+            "forms",
+            "layout"
+        ],
+        "fi-fo-toggle-buttons": [
+            "forms",
+            "card-tables"
+        ],
+        "fi-fo-toggle-buttons-btn-ctn": [
+            "forms",
+            "card-tables"
+        ],
+        "fi-fo-toggle-buttons-input": [
+            "forms",
+            "card-tables"
+        ],
+        "fi-fo-toggle-buttons-wrp": [
+            "forms",
+            "card-tables"
+        ],
+        "fi-font-semibold": [
+            "tables",
+            "card-tables",
+            "infolists"
+        ],
+        "fi-force-enabled": [
+            "tables",
+            "card-tables",
+            "icons"
+        ],
+        "fi-from-default": [
+            "layout"
+        ],
+        "fi-grid": [
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-grid-col": [
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-grid-cols": [
+            "layout",
+            "icons"
+        ],
+        "fi-grid-direction-col": [
+            "forms",
+            "layout",
+            "tables",
+            "card-tables",
+            "icons"
+        ],
+        "fi-growable": [
+            "layout",
+            "card-tables",
+            "icons"
+        ],
+        "fi-has-action": [
+            "forms"
+        ],
+        "fi-header": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-header-heading": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-hidden": [
+            "forms",
+            "layout",
+            "tables"
+        ],
+        "fi-icon": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-icon-btn": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-icon-btn-badge-ctn": [
+            "tables"
+        ],
+        "fi-in-color": [
+            "infolists"
+        ],
+        "fi-in-color-item": [
+            "infolists"
+        ],
+        "fi-in-entry": [
+            "infolists"
+        ],
+        "fi-in-entry-content": [
+            "infolists"
+        ],
+        "fi-in-entry-content-col": [
+            "infolists"
+        ],
+        "fi-in-entry-content-ctn": [
+            "infolists"
+        ],
+        "fi-in-entry-label": [
+            "infolists"
+        ],
+        "fi-in-entry-label-col": [
+            "infolists"
+        ],
+        "fi-in-entry-label-ctn": [
+            "infolists"
+        ],
+        "fi-in-icon": [
+            "infolists"
+        ],
+        "fi-in-image": [
+            "infolists"
+        ],
+        "fi-in-key-value": [
+            "infolists"
+        ],
+        "fi-in-repeatable": [
+            "infolists"
+        ],
+        "fi-in-repeatable-item": [
+            "infolists"
+        ],
+        "fi-in-text": [
+            "infolists"
+        ],
+        "fi-in-text-has-badges": [
+            "infolists"
+        ],
+        "fi-in-text-has-line-breaks": [
+            "infolists"
+        ],
+        "fi-in-text-item": [
+            "infolists"
+        ],
+        "fi-inline": [
+            "forms",
+            "layout",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-input": [
+            "forms",
+            "layout",
+            "tables",
+            "card-tables",
+            "icons"
+        ],
+        "fi-input-has-inline-prefix": [
+            "tables",
+            "card-tables",
+            "icons"
+        ],
+        "fi-input-wrp": [
+            "forms",
+            "layout",
+            "tables",
+            "card-tables",
+            "icons"
+        ],
+        "fi-input-wrp-actions": [
+            "forms"
+        ],
+        "fi-input-wrp-content": [
+            "forms"
+        ],
+        "fi-input-wrp-content-ctn": [
+            "forms",
+            "layout",
+            "tables",
+            "card-tables",
+            "icons"
+        ],
+        "fi-input-wrp-label": [
+            "forms",
+            "tables",
+            "icons"
+        ],
+        "fi-input-wrp-prefix": [
+            "forms",
+            "tables",
+            "card-tables",
+            "icons"
+        ],
+        "fi-input-wrp-prefix-has-content": [
+            "forms",
+            "tables",
+            "card-tables",
+            "icons"
+        ],
+        "fi-input-wrp-prefix-has-label": [
+            "forms",
+            "tables",
+            "icons"
+        ],
+        "fi-input-wrp-suffix": [
+            "forms"
+        ],
+        "fi-input-wrp-suffix-has-label": [
+            "forms"
+        ],
+        "fi-labeled-from-sm": [
+            "tables"
+        ],
+        "fi-layout": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-link": [
+            "forms",
+            "actions",
+            "tables",
+            "card-tables",
+            "icons"
+        ],
+        "fi-loading-indicator": [
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "icons"
+        ],
+        "fi-logo": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-logo-dark": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-logo-light": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-main": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-main-ctn": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-main-sidebar": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-no": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-not-prose": [
+            "forms"
+        ],
+        "fi-outlined": [
+            "layout",
+            "actions"
+        ],
+        "fi-page": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-page-content": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-page-header-main-ctn": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-page-main": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-pagination": [
+            "tables",
+            "icons"
+        ],
+        "fi-pagination-item": [
+            "tables",
+            "icons"
+        ],
+        "fi-pagination-item-btn": [
+            "tables",
+            "icons"
+        ],
+        "fi-pagination-item-icon": [
+            "tables",
+            "icons"
+        ],
+        "fi-pagination-item-label": [
+            "tables",
+            "icons"
+        ],
+        "fi-pagination-items": [
+            "tables",
+            "icons"
+        ],
+        "fi-pagination-next-btn": [
+            "tables",
+            "icons"
+        ],
+        "fi-pagination-overview": [
+            "tables",
+            "icons"
+        ],
+        "fi-pagination-records-per-page-select": [
+            "tables",
+            "icons"
+        ],
+        "fi-pagination-records-per-page-select-ctn": [
+            "tables",
+            "icons"
+        ],
+        "fi-panel-design-system": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-prose": [
+            "forms"
+        ],
+        "fi-radio-input": [
+            "forms"
+        ],
+        "fi-revealable": [
+            "forms"
+        ],
+        "fi-sc": [
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists"
+        ],
+        "fi-sc-action": [
+            "layout"
+        ],
+        "fi-sc-actions": [
+            "actions"
+        ],
+        "fi-sc-callout": [
+            "layout"
+        ],
+        "fi-sc-component": [
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists"
+        ],
+        "fi-sc-dense": [
+            "forms",
+            "layout",
+            "infolists"
+        ],
+        "fi-sc-fieldset": [
+            "layout"
+        ],
+        "fi-sc-flex": [
+            "layout"
+        ],
+        "fi-sc-fused-group": [
+            "layout"
+        ],
+        "fi-sc-has-gap": [
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists"
+        ],
+        "fi-sc-section": [
+            "forms",
+            "layout",
+            "actions",
+            "infolists"
+        ],
+        "fi-sc-tabs": [
+            "forms",
+            "layout",
+            "actions",
+            "infolists"
+        ],
+        "fi-sc-tabs-tab": [
+            "forms",
+            "layout",
+            "actions",
+            "infolists"
+        ],
+        "fi-sc-text": [
+            "forms",
+            "layout",
+            "actions",
+            "infolists"
+        ],
+        "fi-sc-unordered-list": [
+            "layout"
+        ],
+        "fi-sc-wizard": [
+            "layout"
+        ],
+        "fi-sc-wizard-footer": [
+            "layout"
+        ],
+        "fi-sc-wizard-header": [
+            "layout"
+        ],
+        "fi-sc-wizard-header-step": [
+            "layout"
+        ],
+        "fi-sc-wizard-header-step-btn": [
+            "layout"
+        ],
+        "fi-sc-wizard-header-step-description": [
+            "layout"
+        ],
+        "fi-sc-wizard-header-step-icon-ctn": [
+            "layout"
+        ],
+        "fi-sc-wizard-header-step-label": [
+            "layout"
+        ],
+        "fi-sc-wizard-header-step-separator": [
+            "layout"
+        ],
+        "fi-sc-wizard-header-step-text": [
+            "layout"
+        ],
+        "fi-sc-wizard-step": [
+            "layout"
+        ],
+        "fi-secondary": [
+            "layout"
+        ],
+        "fi-section": [
+            "forms",
+            "layout",
+            "actions",
+            "infolists"
+        ],
+        "fi-section-collapse-btn": [
+            "layout"
+        ],
+        "fi-section-content": [
+            "forms",
+            "layout",
+            "actions",
+            "infolists"
+        ],
+        "fi-section-content-ctn": [
+            "forms",
+            "layout",
+            "actions",
+            "infolists"
+        ],
+        "fi-section-footer": [
+            "layout"
+        ],
+        "fi-section-has-header": [
+            "forms",
+            "layout",
+            "actions",
+            "infolists"
+        ],
+        "fi-section-header": [
+            "forms",
+            "layout",
+            "actions",
+            "infolists"
+        ],
+        "fi-section-header-after-ctn": [
+            "layout"
+        ],
+        "fi-section-header-description": [
+            "forms",
+            "layout",
+            "actions",
+            "infolists"
+        ],
+        "fi-section-header-heading": [
+            "forms",
+            "layout",
+            "actions",
+            "infolists"
+        ],
+        "fi-section-header-text-ctn": [
+            "forms",
+            "layout",
+            "actions",
+            "infolists"
+        ],
+        "fi-select-input": [
+            "forms",
+            "layout",
+            "tables",
+            "icons"
+        ],
+        "fi-sidebar": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-sidebar-close-overlay": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-sidebar-group": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-sidebar-group-items": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-sidebar-header": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-sidebar-header-ctn": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-sidebar-header-logo-ctn": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-sidebar-item": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-sidebar-item-btn": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-sidebar-item-has-url": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-sidebar-item-icon": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-sidebar-item-label": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-sidebar-nav": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-sidebar-nav-groups": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-size-lg": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-size-md": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-size-sm": [
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-size-xl": [
+            "actions"
+        ],
+        "fi-size-xs": [
+            "forms",
+            "actions",
+            "tables"
+        ],
+        "fi-sr-only": [
+            "layout",
+            "tables",
+            "card-tables",
+            "icons"
+        ],
+        "fi-striped": [
+            "tables"
+        ],
+        "fi-ta": [
+            "tables",
+            "card-tables",
+            "icons"
+        ],
+        "fi-ta-actions": [
+            "tables",
+            "card-tables",
+            "icons"
+        ],
+        "fi-ta-actions-header-cell": [
+            "tables"
+        ],
+        "fi-ta-cell": [
+            "tables"
+        ],
+        "fi-ta-cell-avatar-url": [
+            "tables"
+        ],
+        "fi-ta-cell-created-at": [
+            "tables"
+        ],
+        "fi-ta-cell-customer-name": [
+            "tables"
+        ],
+        "fi-ta-cell-is-priority": [
+            "tables"
+        ],
+        "fi-ta-cell-reference": [
+            "tables"
+        ],
+        "fi-ta-cell-status": [
+            "tables"
+        ],
+        "fi-ta-cell-total": [
+            "tables"
+        ],
+        "fi-ta-col": [
+            "tables",
+            "card-tables",
+            "icons"
+        ],
+        "fi-ta-col-manager": [
+            "tables",
+            "card-tables",
+            "icons"
+        ],
+        "fi-ta-col-manager-dropdown": [
+            "tables",
+            "card-tables",
+            "icons"
+        ],
+        "fi-ta-col-manager-group": [
+            "tables",
+            "card-tables",
+            "icons"
+        ],
+        "fi-ta-col-manager-group-items": [
+            "tables",
+            "card-tables",
+            "icons"
+        ],
+        "fi-ta-col-manager-header": [
+            "tables",
+            "card-tables",
+            "icons"
+        ],
+        "fi-ta-col-manager-heading": [
+            "tables",
+            "card-tables",
+            "icons"
+        ],
+        "fi-ta-col-manager-item": [
+            "tables",
+            "card-tables",
+            "icons"
+        ],
+        "fi-ta-col-manager-items": [
+            "tables",
+            "card-tables",
+            "icons"
+        ],
+        "fi-ta-col-manager-label": [
+            "tables",
+            "card-tables",
+            "icons"
+        ],
+        "fi-ta-col-manager-reorder-handle": [
+            "tables",
+            "card-tables",
+            "icons"
+        ],
+        "fi-ta-content": [
+            "card-tables",
+            "icons"
+        ],
+        "fi-ta-content-ctn": [
+            "tables",
+            "card-tables",
+            "icons"
+        ],
+        "fi-ta-content-grid": [
+            "card-tables",
+            "icons"
+        ],
+        "fi-ta-ctn": [
+            "tables",
+            "card-tables",
+            "icons"
+        ],
+        "fi-ta-ctn-with-content-layout": [
+            "card-tables",
+            "icons"
+        ],
+        "fi-ta-ctn-with-footer": [
+            "tables",
+            "icons"
+        ],
+        "fi-ta-ctn-with-header": [
+            "tables",
+            "card-tables",
+            "icons"
+        ],
+        "fi-ta-empty-header-cell": [
+            "tables"
+        ],
+        "fi-ta-filters": [
+            "tables"
+        ],
+        "fi-ta-filters-dropdown": [
+            "tables"
+        ],
+        "fi-ta-filters-header": [
+            "tables"
+        ],
+        "fi-ta-filters-heading": [
+            "tables"
+        ],
+        "fi-ta-header": [
+            "tables"
+        ],
+        "fi-ta-header-adaptive-actions-position": [
+            "tables"
+        ],
+        "fi-ta-header-cell": [
+            "tables"
+        ],
+        "fi-ta-header-cell-avatar-url": [
+            "tables"
+        ],
+        "fi-ta-header-cell-created-at": [
+            "tables"
+        ],
+        "fi-ta-header-cell-customer-name": [
+            "tables"
+        ],
+        "fi-ta-header-cell-is-priority": [
+            "tables"
+        ],
+        "fi-ta-header-cell-reference": [
+            "tables"
+        ],
+        "fi-ta-header-cell-sort-btn": [
+            "tables"
+        ],
+        "fi-ta-header-cell-status": [
+            "tables"
+        ],
+        "fi-ta-header-cell-total": [
+            "tables"
+        ],
+        "fi-ta-header-ctn": [
+            "tables",
+            "card-tables",
+            "icons"
+        ],
+        "fi-ta-header-toolbar": [
+            "tables",
+            "card-tables",
+            "icons"
+        ],
+        "fi-ta-icon": [
+            "tables"
+        ],
+        "fi-ta-image": [
+            "tables",
+            "card-tables"
+        ],
+        "fi-ta-main": [
+            "tables",
+            "card-tables",
+            "icons"
+        ],
+        "fi-ta-page-checkbox": [
+            "tables"
+        ],
+        "fi-ta-record": [
+            "card-tables",
+            "icons"
+        ],
+        "fi-ta-record-checkbox": [
+            "tables"
+        ],
+        "fi-ta-record-content": [
+            "card-tables",
+            "icons"
+        ],
+        "fi-ta-record-content-ctn": [
+            "card-tables",
+            "icons"
+        ],
+        "fi-ta-row": [
+            "tables"
+        ],
+        "fi-ta-search-field": [
+            "tables",
+            "card-tables",
+            "icons"
+        ],
+        "fi-ta-selection-cell": [
+            "tables"
+        ],
+        "fi-ta-selection-indicator": [
+            "tables"
+        ],
+        "fi-ta-selection-indicator-actions-ctn": [
+            "tables"
+        ],
+        "fi-ta-stack": [
+            "card-tables",
+            "icons"
+        ],
+        "fi-ta-table": [
+            "tables"
+        ],
+        "fi-ta-text": [
+            "tables",
+            "card-tables",
+            "icons"
+        ],
+        "fi-ta-text-description": [
+            "tables"
+        ],
+        "fi-ta-text-has-badges": [
+            "tables",
+            "card-tables",
+            "icons"
+        ],
+        "fi-ta-text-has-descriptions": [
+            "tables"
+        ],
+        "fi-ta-text-item": [
+            "tables",
+            "card-tables",
+            "icons"
+        ],
+        "fi-tabs": [
+            "forms",
+            "layout",
+            "actions",
+            "infolists",
+            "icons"
+        ],
+        "fi-tabs-item": [
+            "forms",
+            "layout",
+            "actions",
+            "infolists",
+            "icons"
+        ],
+        "fi-tabs-item-label": [
+            "forms",
+            "layout",
+            "actions",
+            "infolists",
+            "icons"
+        ],
+        "fi-text-color-0": [
+            "actions"
+        ],
+        "fi-text-color-400": [
+            "forms",
+            "layout"
+        ],
+        "fi-text-color-50": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-text-color-500": [
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-text-color-600": [
+            "forms",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-text-color-700": [
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-text-color-900": [
+            "forms",
+            "actions"
+        ],
+        "fi-theme-switcher": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-theme-switcher-btn": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-toggle": [
+            "forms",
+            "layout"
+        ],
+        "fi-toggle-on": [
+            "forms",
+            "layout"
+        ],
+        "fi-topbar": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-topbar-close-sidebar-btn": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-topbar-ctn": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-topbar-end": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-topbar-open-sidebar-btn": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-topbar-start": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-user-avatar": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-user-menu": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-user-menu-trigger": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-valid": [
+            "forms",
+            "tables",
+            "card-tables",
+            "icons"
+        ],
+        "fi-vertical-align-start": [
+            "overview",
+            "forms",
+            "layout",
+            "actions",
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ],
+        "fi-width-xs": [
+            "tables",
+            "card-tables",
+            "icons"
+        ],
+        "fi-wrapped": [
+            "tables",
+            "card-tables",
+            "infolists",
+            "icons"
+        ]
+    }
+}

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Blade;
 use Laravel\Mcp\Facades\Mcp;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Visualbuilder\FilamentDesignSystem\Console\Commands\RebuildClassManifestCommand;
 use Visualbuilder\FilamentDesignSystem\Mcp\DesignSystemServer;
 use Visualbuilder\FilamentDesignSystem\Theme\Tokens;
 
@@ -23,7 +24,10 @@ class FilamentDesignSystemServiceProvider extends PackageServiceProvider
             ->hasMigration('create_design_system_users_table')
             ->runsMigrations()
             ->hasRoute('web')
-            ->hasViews('filament-design-system');
+            ->hasViews('filament-design-system')
+            ->hasCommands([
+                RebuildClassManifestCommand::class,
+            ]);
     }
 
     public function packageBooted(): void
@@ -31,9 +35,36 @@ class FilamentDesignSystemServiceProvider extends PackageServiceProvider
         parent::packageBooted();
 
         $this->registerTokenStylesheet();
+        $this->registerThemeOverridesStylesheet();
         $this->registerLoginCredentialsCallout();
         $this->registerMcpServer();
         $this->registerPublishables();
+    }
+
+    /**
+     * Inject any CSS overrides from the overlay's theme.css_overrides into the
+     * panel head, AFTER the token stylesheet so overrides win specificity ties.
+     * Authored by AI via the write_theme_overrides MCP tool.
+     */
+    protected function registerThemeOverridesStylesheet(): void
+    {
+        FilamentView::registerRenderHook(
+            PanelsRenderHook::HEAD_END,
+            function (): string {
+                if (Filament::getCurrentPanel()?->getId() !== 'design-system') {
+                    return '';
+                }
+
+                $overlay = Tokens::overlay();
+                $css = $overlay['theme']['css_overrides'] ?? '';
+
+                if (trim($css) === '') {
+                    return '';
+                }
+
+                return '<style id="design-system-overrides">' . $css . '</style>';
+            },
+        );
     }
 
     protected function registerMcpServer(): void

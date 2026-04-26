@@ -18,9 +18,14 @@ class ReadTokens extends Tool
 {
     public function handle(Request $request): Response
     {
+        $overlay = Tokens::overlay();
+
         return Response::json([
             'tokens' => Tokens::resolved(),
             'panel' => Tokens::resolvedPanel(),
+            'theme' => [
+                'css_overrides' => $overlay['theme']['css_overrides'] ?? '',
+            ],
             'overlay_path' => Tokens::overlayPath(),
             'overlay_present' => Tokens::rawOverlay() !== null,
             'catalogue' => [

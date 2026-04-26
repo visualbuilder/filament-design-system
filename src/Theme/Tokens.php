@@ -81,15 +81,16 @@ class Tokens
         }
 
         // New shape: any of the known top-level keys are present.
-        if (array_key_exists('tokens', $raw) || array_key_exists('panel', $raw)) {
+        if (array_key_exists('tokens', $raw) || array_key_exists('panel', $raw) || array_key_exists('theme', $raw)) {
             return [
                 'tokens' => is_array($raw['tokens'] ?? null) ? $raw['tokens'] : [],
                 'panel' => is_array($raw['panel'] ?? null) ? $raw['panel'] : [],
+                'theme' => is_array($raw['theme'] ?? null) ? $raw['theme'] : [],
             ];
         }
 
         // Legacy shape (v0.3.0): the whole file is the tokens tree.
-        return ['tokens' => $raw, 'panel' => []];
+        return ['tokens' => $raw, 'panel' => [], 'theme' => []];
     }
 
     /**

@@ -4,6 +4,30 @@ All notable changes to `visualbuilder/filament-design-system` will be documented
 
 ## Unreleased
 
+### v0.5.0 — theme-overrides layer
+
+- **`write_theme_overrides` tool** — accepts a CSS string, validates (balanced
+  braces, no `<script>` / `<style>` / `@import`, 64KB cap), persists to
+  `overlay.theme.css_overrides`. Injected on every panel page via a render
+  hook AFTER Filament's own styles so overrides win specificity ties.
+  Supports `mode="append"` and `dry_run=true`.
+- **`export_theme_css` tool** — returns the current overrides as a string
+  ready to paste into `resources/css/filament/{panel}/theme.css`. The
+  graduation flow: AI iterates via overrides; once signed off, dev pastes
+  to the canonical theme file and resets the overlay layer.
+- **`list_classes` tool** — returns the manifest of `fi-*` and `ds-*` class
+  names actually present on the catalogue pages, scoped per-page. The AI
+  calls this before writing overrides to avoid hallucinating selector names.
+  Filterable via `prefix` and `page` args.
+- **`filament-design-system:rebuild-class-manifest` artisan command** —
+  re-extracts the class manifest from the catalogue. Run after upgrading
+  `filament/filament`.
+- **`reset_overlay scope=css`** added to clear just the CSS overrides layer.
+- `read_tokens` returns `theme.css_overrides` alongside `tokens` and `panel`
+  so the AI sees the full editable surface in one call.
+- Server bumped to 0.5.0; instructions updated to teach the new layer and
+  the read → write → screenshot → graduate cycle.
+
 ### v0.4.0
 
 - **`generate_palette` tool** — synthesises an 11-shade ramp (50→950) from a

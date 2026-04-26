@@ -26,12 +26,14 @@ use Visualbuilder\FilamentDesignSystem\Theme\Tokens;
 #[IsDestructive]
 class ResetOverlay extends Tool
 {
+    protected const SCOPES = ['all', 'tokens', 'panel', 'css'];
+
     public function handle(Request $request): Response
     {
         $scope = (string) $request->get('scope', 'all');
 
-        if (! in_array($scope, ['all', 'tokens', 'panel'], true)) {
-            return Response::error('scope must be one of: all, tokens, panel.');
+        if (! in_array($scope, self::SCOPES, true)) {
+            return Response::error('scope must be one of: ' . implode(', ', self::SCOPES) . '.');
         }
 
         $path = Tokens::overlayPath();
@@ -55,9 +57,21 @@ class ResetOverlay extends Tool
         }
 
         $existing = Tokens::overlay();
-        $existing[$scope] = [];
 
-        if (($existing['tokens'] ?? []) === [] && ($existing['panel'] ?? []) === []) {
+        if ($scope === 'css') {
+            unset($existing['theme']['css_overrides']);
+            if (($existing['theme'] ?? []) === []) {
+                unset($existing['theme']);
+            }
+        } else {
+            $existing[$scope] = [];
+        }
+
+        $hasContent = ($existing['tokens'] ?? []) !== []
+            || ($existing['panel'] ?? []) !== []
+            || ($existing['theme'] ?? []) !== [];
+
+        if (! $hasContent) {
             unlink($path);
 
             return Response::json([
@@ -84,8 +98,8 @@ class ResetOverlay extends Tool
     {
         return [
             'scope' => $schema->string()
-                ->description('What to reset. "all" (default) removes the overlay file entirely. "tokens" drops only the tokens subtree. "panel" drops only the panel subtree.')
-                ->enum(['all', 'tokens', 'panel']),
+                ->description('What to reset. "all" (default) removes the overlay file entirely. "tokens" drops only the tokens subtree. "panel" drops only the panel subtree. "css" drops only the theme CSS overrides.')
+                ->enum(self::SCOPES),
         ];
     }
 }
