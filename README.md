@@ -1,23 +1,30 @@
 # Filament Design System
 
-A standalone design-system review panel for Filament v5 — and the substrate for an AI-friendly theme designer.
+A standalone design-system review panel for Filament v5, plus an AI-driven theme designer over MCP.
 
 ## What it is
 
-A Filament panel that renders the full catalogue of Filament v5 components (forms, layout, actions, tables, infolists, widgets, auth, account screens) against a single tokens config. Drop it into any Filament v5 application and a graphic designer can review the live look-and-feel in actual Filament chrome — sidebar, topbar, dark/light mode, the lot.
+Two things in one package:
+
+1. **A Filament panel** rendering the full catalogue of v5 components — forms, layout, actions, tables (including card-style grids), infolists, widgets, icons, auth screens — against a single tokens config. Drop it into any Filament v5 application and a graphic designer can review the live look-and-feel in actual Filament chrome.
+2. **An MCP server** that exposes the panel's design surface to AI clients. An agent can read the current theme, generate palettes, edit tokens, swap brand assets, write component-level CSS overrides, and verify visually via screenshots — all through a stdio MCP connection.
+
+The panel is the AI's test canvas. The MCP server is the AI's hands.
 
 ## Why a separate panel
 
 - **Iterate the theme without risk to production panels.** Override the tokens, see the entire component library re-render, ship when ready.
-- **Public review surface.** A dedicated guard, a single seeded demo user, and hard-coded demo data on every page mean the panel is safe to expose behind a basic deployment gate (DNS, basic auth, env-strip).
-- **AI-friendly substrate.** Tokens are a flat, structured config — exactly the shape an LLM can edit reliably. The catalogue is the LLM's test surface.
+- **Review surface.** A dedicated guard, a single seeded demo user, and hard-coded demo data on every page mean the panel is safe to expose behind a basic deployment gate (DNS, basic auth, env-strip).
+- **AI-friendly substrate.** Tokens and panel chrome are flat, structured config. CSS overrides go through a validated layer with a class manifest the AI can query before targeting selectors. Three editable layers, one overlay file.
 
-## Roadmap
+## Version history
 
-- **v0.1:** panel, catalogue pages, separate guard with demo user, custom login showing credentials.
-- **v0.2:** publishable tokens config, config-driven catalogue colour sections, single source of truth.
-- **v0.3 (current):** MCP server with `read_tokens`, `write_tokens`, `screenshot_catalogue`. JSON tokens overlay so an LLM never has to touch PHP.
-- **v0.4:** prompt library shipped with the server (re-skin from image, raise contrast, generate complementary palette).
+- **v0.1** — panel, catalogue pages, separate guard with demo user, custom login showing credentials.
+- **v0.2** — publishable tokens config, config-driven catalogue colour sections.
+- **v0.3** — MCP server with `read_tokens` / `write_tokens` / `screenshot_catalogue`. JSON overlay so the AI never touches PHP.
+- **v0.3.1** — overlay extended to `{ tokens, panel }`; panel chrome (font, brand, vite_theme, etc.) editable via MCP. Reset tool added.
+- **v0.4** — `generate_palette` (single hex → 11-shade ramp) and `set_brand_logo` (URL / data URI / path) tools.
+- **v0.5 (current)** — `write_theme_overrides` for component-level CSS the tokens layer can't reach. `list_classes` returns the actual `fi-*` / `ds-*` class manifest (extracted from the catalogue) so the AI doesn't hallucinate selectors. `export_theme_css` produces the CSS string for paste-into-`theme.css` graduation.
 
 ## Installation
 
@@ -27,7 +34,7 @@ This package is intended to be installed as a **dev dependency** so it never shi
 composer require --dev visualbuilder/filament-design-system
 ```
 
-Then gate the panel-provider registration in `bootstrap/providers.php` so it's silently skipped when the package isn't installed (e.g. on `composer install --no-dev`):
+Gate the panel-provider registration in `bootstrap/providers.php` so it's silently skipped when the package isn't installed (e.g. on `composer install --no-dev`):
 
 ```php
 if (class_exists(\Visualbuilder\FilamentDesignSystem\FilamentDesignSystemPlugin::class)) {
@@ -41,7 +48,7 @@ Publish the panel-provider stub:
 php artisan vendor:publish --tag=filament-design-system-provider
 ```
 
-This drops `app/Providers/Filament/DesignSystemPanelProvider.php` into the host app. Register it in `bootstrap/providers.php`.
+This drops `app/Providers/Filament/DesignSystemPanelProvider.php` into the host app. Edit it to wire your existing theme CSS, panel colours, font, logos — see the published file's comments.
 
 Run the migration and seed the demo user:
 
@@ -50,15 +57,9 @@ php artisan migrate
 php artisan db:seed --class="Visualbuilder\\FilamentDesignSystem\\Database\\Seeders\\DemoUserSeeder"
 ```
 
-## MCP server (v0.3)
+The catalogue is then live at `/design-system` (or whatever path you configure in the panel provider). Login uses the demo credentials shown on the login screen.
 
-The package ships a Laravel MCP server that lets an AI client read and write the design tokens, then verify the visual result via screenshots. Two tools are always available; the third (`screenshot_catalogue`) requires a one-line closure registration in your panel provider.
-
-### Tools
-
-- **`read_tokens`** — returns the resolved token tree, the catalogue layout, and panel chrome config. Read-only.
-- **`write_tokens`** — accepts a partial token tree, validates colour values, and writes to `storage/app/design-system-tokens.json` (the AI overlay). Deep-merges by default; supports `dry_run` for proposing without persisting.
-- **`screenshot_catalogue`** — captures a named catalogue page (`overview` / `forms` / `layout` / `actions` / `tables` / `infolists` / `widgets`) and returns base64. Returns setup guidance instead of an image if no screenshot closure is registered.
+## MCP server
 
 ### Wire it up in Claude Code
 
@@ -75,11 +76,106 @@ Add to your project's `.mcp.json`:
 }
 ```
 
-The server runs over stdio. No HTTP, no auth, no extra ports.
+Server runs over stdio. No HTTP, no auth tokens, no extra ports. Restart your Claude Code session and the tool list appears.
 
-### Optional: register a screenshot capture closure
+### Inspect the server
 
-Pass a closure to `screenshotCapture()` on the plugin in `DesignSystemPanelProvider`. The closure receives a one-time signed URL that points at a bridge route which logs in the demo user and redirects to the requested catalogue page — your screenshot tool just has to fetch the URL with a headless browser (Lambda Chrome, Playwright, Browsershot, etc.) that follows redirects with cookies.
+The official MCP Inspector visualises the server's tool surface and lets you fire calls without writing JSON-RPC by hand:
+
+```bash
+php artisan mcp:inspector design-system
+```
+
+Browse the laravel-mcp [docs](https://laravel.com/docs/mcp) for further options (web transport, OAuth, etc.).
+
+### Tools
+
+The server registers nine tools across three editable layers — **tokens** (CSS variables), **panel** (chrome: font, logos, vite_theme), and **theme** (raw CSS overrides). All edits land in a single overlay file at `storage/app/design-system-tokens.json`.
+
+| Tool | Read-only | What it does |
+|---|---|---|
+| `read_tokens` | ✓ | Resolved tokens + panel + theme overrides + catalogue layout |
+| `write_tokens` | | Validates and persists a partial `{ tokens, panel }` overlay; deep-merges by default; `dry_run` and `replace` supported |
+| `generate_palette` | ✓ | Single hex → 11-shade ramp (50→950) anchored at 500 by default |
+| `set_brand_logo` | | Sets `panel.brand.{logo|logo_dark|favicon}` from a URL, data URI, or existing public/ path |
+| `write_theme_overrides` | | Validates and persists a CSS string to `theme.css_overrides`; injected as a `<style>` block on every panel page after Filament's own styles |
+| `export_theme_css` | ✓ | Returns the current overrides as a string ready to paste into `theme.css` |
+| `list_classes` | ✓ | Returns the manifest of `fi-*` and `ds-*` classes actually present on the catalogue, scoped per-page; filterable by `prefix` and `page` |
+| `reset_overlay` | destructive | Reverts AI edits — `scope=all` (default) / `tokens` / `panel` / `css` |
+| `screenshot_catalogue` | ✓ | Captures a named catalogue page via a host-supplied closure (returns setup guidance gracefully when not configured) |
+
+### Editing layers
+
+The overlay file at `storage/app/design-system-tokens.json` has three top-level keys, all optional:
+
+```json
+{
+  "tokens": {
+    "colors":    { "primary": { "50": "#…", "500": "#…", "950": "#…" }, … },
+    "typography":{ "family": { "body": "Nunito" }, "weight": { "heading": 200 } },
+    "spacing":   { … },
+    "radius":    { … },
+    "shadow":    { … }
+  },
+  "panel": {
+    "vite_theme":         "resources/css/filament/admin/theme.css",
+    "default_theme_mode": "dark",
+    "max_content_width":  "screen-4xl",
+    "font":               { "family": "Nunito", "provider": "Filament\\FontProviders\\GoogleFontProvider" },
+    "brand":              { "logo": "design-system/brand/logo-…svg", "favicon": "…" },
+    "colors":             { "primary": [50→950 hex map], … }
+  },
+  "theme": {
+    "css_overrides": ".fi-section-header h3 { font-weight: 200; … }"
+  }
+}
+```
+
+Every key in the overlay deep-merges over the PHP config (`config/design-system.php`). The PHP config stays as documentation + defaults; the overlay is the only file the AI writes.
+
+### Example workflows
+
+These are the kinds of natural-language asks that map cleanly onto the tools. The agent decides which tool(s) to call.
+
+**Change the brand colour, with a coherent ramp**
+
+> *"Switch the primary palette to a coral around `#ea746b`. Generate the full 11-shade ramp and apply it. Show me the result."*
+
+Agent calls: `generate_palette(hex="#ea746b")` → `write_tokens(tokens.colors.primary = <returned ramp>)` → `screenshot_catalogue(page="overview")`.
+
+**Switch the panel font**
+
+> *"Try the panel in Nunito instead of Roboto."*
+
+Agent calls: `write_tokens(panel.font.family="Nunito")`. Filament loads the new Google Font on next render.
+
+**Upload a new logo**
+
+> *"Set the dark-mode logo to `https://example.com/logo-dark.svg`."*
+
+Agent calls: `set_brand_logo(target="logo_dark", source="https://example.com/logo-dark.svg")`. The asset is fetched, content-hashed, saved under `public/design-system/brand/`, and `panel.brand.logo_dark` is updated.
+
+**Component-level layout tweak**
+
+> *"Section headers feel heavy. Find the right class, then lighten heading weight and tighten letter-spacing."*
+
+Agent calls: `list_classes(prefix="fi-section-")` → reasons over the result → `write_theme_overrides(css=".fi-section-header h3 { font-weight: 200; letter-spacing: -0.01em; }")` → `screenshot_catalogue(page="forms")`.
+
+**Graduate signed-off CSS into the host's theme file**
+
+> *"Looks good. Give me the CSS so I can paste it into `theme.css`."*
+
+Agent calls: `export_theme_css()` and returns the CSS string with a generated-at banner. You paste it into `resources/css/filament/{panel}/theme.css` and ask the agent to *"reset the css overlay layer"* — `reset_overlay(scope="css")`.
+
+**Revert everything**
+
+> *"Throw away all my changes."*
+
+Agent calls: `reset_overlay()` (scope defaults to `all`). Overlay file deleted; you're back to the PHP config defaults.
+
+## Optional: register a screenshot closure
+
+The `screenshot_catalogue` tool is optional. If you want visual feedback during AI iteration, register a closure on the plugin in your panel provider. The closure receives a one-time signed URL pointing at a bridge route which logs in the demo user and redirects to the requested catalogue page — your screenshot tool fetches the URL with any headless browser that follows redirects with cookies.
 
 ```php
 FilamentDesignSystemPlugin::make()
@@ -98,15 +194,17 @@ FilamentDesignSystemPlugin::make()
     }),
 ```
 
-The closure should return either a base64 string or an array `['image' => '<base64>', 'mime' => 'image/png']`. Without it, `read_tokens` and `write_tokens` still work — token edits just won't have visual confirmation.
+The closure should return either a base64 string or `['image' => '<base64>', 'mime' => 'image/png']`. Without it, the other tools still work — token edits just won't have visual confirmation.
 
-### How tokens flow
+## Refreshing the class manifest
 
-1. `config/design-system.php` is the *defaults*: shipped with the package, overridable when a consumer publishes the config.
-2. `storage/app/design-system-tokens.json` is the *overlay*: the AI's writable surface. Keys deep-merge over the config at boot.
-3. The catalogue and the panel's CSS variables both render from the merged tree, so any edit cascades.
+`list_classes` reads from a static manifest at `data/filament-class-manifest.json`. After upgrading `filament/filament` (or making major changes to the catalogue), refresh it:
 
-The AI never has to write PHP. The overlay is JSON only.
+```bash
+php artisan filament-design-system:rebuild-class-manifest
+```
+
+The command auths the demo user, server-renders each catalogue page, extracts every `fi-*` and `ds-*` class, and writes the deduped per-page manifest. Initial release captures ~378 classes across 8 pages.
 
 ## Deployment guidance
 
@@ -115,6 +213,7 @@ The panel is intentionally permissive (login page shows the password; demo flows
 1. Add a dev-only DNS entry for the design-system panel.
 2. Wrap the panel route in nginx basic auth.
 3. Conditionally register the panel provider only outside `production` environments.
+4. Install as `--dev` so production composer installs never see the package at all.
 
 ## License
 
