@@ -10,6 +10,7 @@ use Filament\Enums\ThemeMode;
 use Filament\Panel;
 use Filament\Support\Concerns\EvaluatesClosures;
 use Visualbuilder\FilamentDesignSystem\Pages\Actions;
+use Visualbuilder\FilamentDesignSystem\Theme\Tokens;
 use Visualbuilder\FilamentDesignSystem\Pages\CardTables;
 use Visualbuilder\FilamentDesignSystem\Pages\Forms;
 use Visualbuilder\FilamentDesignSystem\Pages\Icons;
@@ -124,7 +125,10 @@ class FilamentDesignSystemPlugin implements Plugin
      */
     protected function applyPanelConfig(Panel $panel): void
     {
-        $config = config('design-system.panel', []);
+        // Read from the resolved panel layer so JSON-overlay edits (via the
+        // MCP write_tokens tool's `panel` subtree) take effect alongside the
+        // PHP config defaults.
+        $config = Tokens::resolvedPanel();
 
         if ($theme = $config['vite_theme'] ?? null) {
             $panel->viteTheme($theme);

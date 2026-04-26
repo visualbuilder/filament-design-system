@@ -12,7 +12,7 @@ use Laravel\Mcp\Server\Tool;
 use Laravel\Mcp\Server\Tools\Annotations\IsReadOnly;
 use Visualbuilder\FilamentDesignSystem\Theme\Tokens;
 
-#[Description('Returns the design-system token tree (colours, typography, spacing, radius, shadow) plus the catalogue layout. Use this to understand the current theme before proposing edits via write_tokens.')]
+#[Description('Returns the resolved design-system state — the token tree (colours, typography, spacing, radius, shadow), the panel chrome (font, brand, vite_theme, max_content_width, etc.), and the catalogue layout. Both tokens and panel are editable via write_tokens. Call this first to understand the current theme before proposing edits.')]
 #[IsReadOnly]
 class ReadTokens extends Tool
 {
@@ -20,12 +20,12 @@ class ReadTokens extends Tool
     {
         return Response::json([
             'tokens' => Tokens::resolved(),
+            'panel' => Tokens::resolvedPanel(),
             'overlay_path' => Tokens::overlayPath(),
-            'overlay_present' => Tokens::overlay() !== null,
+            'overlay_present' => Tokens::rawOverlay() !== null,
             'catalogue' => [
                 'colour_sections' => config('design-system.catalogue.colour_sections', []),
             ],
-            'panel' => config('design-system.panel', []),
         ]);
     }
 

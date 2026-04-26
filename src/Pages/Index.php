@@ -21,10 +21,11 @@ class Index extends Page
     public function getViewData(): array
     {
         $tokens = Tokens::resolved();
+        $panel = Tokens::resolvedPanel();
 
         return [
             'typography' => $tokens['typography'] ?? [],
-            'panel_font' => config('design-system.panel.font.family') ?? 'Filament default (system sans-serif)',
+            'panel_font' => $panel['font']['family'] ?? 'Filament default (system sans-serif)',
             'colors' => $tokens['colors'] ?? [],
             'colour_sections' => config('design-system.catalogue.colour_sections', []),
             'spacing' => $tokens['spacing'] ?? [],

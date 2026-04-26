@@ -12,14 +12,30 @@ use Laravel\Mcp\Server\Tool;
 use Visualbuilder\FilamentDesignSystem\Theme\Tokens;
 
 #[Description(<<<'EOT'
-    Writes a partial token tree to the overlay file (storage/app/design-system-tokens.json).
+    Writes a partial overlay to storage/app/design-system-tokens.json.
 
-    The shape mirrors design-system.tokens — e.g. {"colors": {"primary": {"500": "#5d36ff"}}}.
-    By default the overlay is deep-merged with what's already there, so partial edits don't
-    wipe other tokens. Pass replace=true to swap the entire overlay (rare).
+    The overlay shape is { "tokens": {...}, "panel": {...} } — either subtree
+    is optional. The shape mirrors config('design-system.*'):
 
-    Colour values may be hex (#rrggbb), rgb()/rgba(), hsl()/hsla(), oklch(), or oklab().
-    Other token types (sizes, weights, durations) accept any string.
+      tokens — colors / typography / spacing / radius / shadow
+      panel  — font / brand / colors / vite_theme / max_content_width / default_theme_mode
+
+    Examples:
+      Set primary 500:
+        { "tokens": { "colors": { "primary": { "500": "#ea746b" } } } }
+
+      Switch the panel font to Nunito:
+        { "panel": { "font": { "family": "Nunito" } } }
+
+      Both at once:
+        { "tokens": { ... }, "panel": { ... } }
+
+    By default the overlay is deep-merged with what's already there, so partial
+    edits don't wipe other tokens. Pass replace=true to swap the entire overlay.
+
+    Colour values may be hex (#rrggbb), rgb()/rgba(), hsl()/hsla(), oklch(), or
+    oklab(). Other token types (sizes, weights, font names, paths) accept any
+    string.
 
     After writing, call screenshot_catalogue to see the visual result.
     EOT)]
@@ -27,30 +43,32 @@ class WriteTokens extends Tool
 {
     public function handle(Request $request): Response
     {
-        /** @var array<string, mixed>|null $tokens */
         $tokens = $request->get('tokens');
+        $panel = $request->get('panel');
         $replace = (bool) $request->get('replace', false);
         $dryRun = (bool) $request->get('dry_run', false);
 
-        if (! is_array($tokens) || $tokens === []) {
-            return Response::error('The `tokens` argument must be a non-empty object mirroring the tokens shape.');
+        if (! is_array($tokens) && ! is_array($panel)) {
+            return Response::error('Provide at least one of `tokens` or `panel` as a non-empty object.');
         }
 
-        if ($invalid = $this->findInvalidColors($tokens)) {
+        if (is_array($tokens) && ($invalid = $this->findInvalidColors($tokens))) {
             return Response::error(
-                "These values don't look like valid CSS colours: " . implode(', ', $invalid)
+                "These token colour values aren't valid CSS colours: " . implode(', ', $invalid)
                 . '. Use hex, rgb(), hsl(), oklch(), or oklab().',
             );
         }
 
-        $existing = Tokens::overlay() ?? [];
-        $next = $replace ? $tokens : $this->deepMerge($existing, $tokens);
+        $proposed = array_filter([
+            'tokens' => is_array($tokens) ? $tokens : null,
+            'panel' => is_array($panel) ? $panel : null,
+        ], fn ($v) => $v !== null);
+
+        $existing = $replace ? [] : Tokens::overlay();
+        $next = $this->deepMerge($existing, $proposed);
 
         if ($dryRun) {
-            return Response::json([
-                'dry_run' => true,
-                'effective_overlay' => $next,
-            ]);
+            return Response::json(['dry_run' => true, 'effective_overlay' => $next]);
         }
 
         $this->persist($next);
@@ -66,8 +84,9 @@ class WriteTokens extends Tool
     {
         return [
             'tokens' => $schema->object()
-                ->description('Partial tokens tree to merge into the overlay. Shape mirrors design-system.tokens — colors, typography, spacing, radius, shadow.')
-                ->required(),
+                ->description('Partial tokens tree (colors, typography, spacing, radius, shadow). Shape mirrors config(\'design-system.tokens\').'),
+            'panel' => $schema->object()
+                ->description('Partial panel chrome config (font, brand, vite_theme, max_content_width, default_theme_mode). Shape mirrors config(\'design-system.panel\').'),
             'replace' => $schema->boolean()
                 ->description('If true, replace the entire overlay instead of deep-merging.'),
             'dry_run' => $schema->boolean()
@@ -76,14 +95,13 @@ class WriteTokens extends Tool
     }
 
     /**
-     * Walk the proposed tree looking for keys that look like colour-token leaves
-     * (i.e. under colors.*) and validate the values format. Non-colour branches
-     * are skipped.
+     * Walk the proposed tokens tree looking for colour values under colors.*
+     * and reject anything that doesn't parse as a CSS colour.
      *
      * @param  array<string, mixed>  $tokens
      * @return list<string>
      */
-    protected function findInvalidColors(array $tokens, string $path = ''): array
+    protected function findInvalidColors(array $tokens): array
     {
         $invalid = [];
 
