@@ -47,6 +47,25 @@
     </style>
 
     <div class="ds-page">
+        {{-- Welcome hero — replicates the "Welcome / <name>" pattern from
+             the designer's reference. Hosts that ship their own illustration
+             (e.g. resources/svg/wave.svg) pass its blade-icon name as the
+             `icon` prop. Falls back to a Heroicon if that prop is omitted. --}}
+        <section class="ds-section">
+            <header class="ds-section__head">
+                <div class="ds-section__title">Welcome hero</div>
+                <div class="ds-section__sub">
+                    Circular illustration badge + light pink greeting + bolder name.
+                </div>
+            </header>
+
+            <x-filament-design-system::welcome
+                icon="wave"
+                greeting="Welcome"
+                name="Zoe Chadwick"
+            />
+        </section>
+
         {{-- Typography --}}
         <section class="ds-section">
             <header class="ds-section__head">

@@ -4,6 +4,20 @@ All notable changes to `visualbuilder/filament-design-system` will be documented
 
 ## Unreleased
 
+### v0.9.0 — Welcome hero component + catalogue showcase
+
+- **`<x-filament-design-system::welcome>` Blade component.** Renders the
+  "Welcome / <name>" pattern from the designer's reference: circular
+  illustration badge + light/extralight pink greeting + bolder user name.
+  Self-contained styles (no @push/@once) inside a single root element so
+  it satisfies Livewire's single-root-element rule.
+- **Catalogue Index page now showcases the component** at the top so
+  designers can iterate on the Welcome chrome via the design-system MCP.
+- Props: `icon` (any blade-icons name, default `heroicon-o-hand-raised`),
+  `greeting` (default 'Welcome'), `name` (default 'Design Reviewer').
+  Hosts that ship their own illustration (e.g. `resources/svg/wave.svg`)
+  pass it by name.
+
 ### v0.8.0 — global search demo resource
 
 - **`DesignSystemUserResource` registered on the panel**, with
