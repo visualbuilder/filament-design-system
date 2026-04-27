@@ -24,7 +24,8 @@ The panel is the AI's test canvas. The MCP server is the AI's hands.
 - **v0.3** — MCP server with `read_tokens` / `write_tokens` / `screenshot_catalogue`. JSON overlay so the AI never touches PHP.
 - **v0.3.1** — overlay extended to `{ tokens, panel }`; panel chrome (font, brand, vite_theme, etc.) editable via MCP. Reset tool added.
 - **v0.4** — `generate_palette` (single hex → 11-shade ramp) and `set_brand_logo` (URL / data URI / path) tools.
-- **v0.5 (current)** — `write_theme_overrides` for component-level CSS the tokens layer can't reach. `list_classes` returns the actual `fi-*` / `ds-*` class manifest (extracted from the catalogue) so the AI doesn't hallucinate selectors. `export_theme_css` produces the CSS string for paste-into-`theme.css` graduation.
+- **v0.5** — `write_theme_overrides` for component-level CSS the tokens layer can't reach. `list_classes` returns the actual `fi-*` / `ds-*` class manifest (extracted from the catalogue) so the AI doesn't hallucinate selectors. `export_theme_css` produces the CSS string for paste-into-`theme.css` graduation.
+- **v0.6 (current)** — Playwright as the default screenshot capture (no host closure required if `node_modules/playwright` is present). `screenshot_catalogue` wraps closure calls in try/catch so host bugs no longer crash the MCP connection. PNG saved to disk and path returned as text — works around Laravel\Mcp's unimplemented `Response::image()` for tool results.
 
 ## Installation
 
@@ -173,28 +174,32 @@ Agent calls: `export_theme_css()` and returns the CSS string with a generated-at
 
 Agent calls: `reset_overlay()` (scope defaults to `all`). Overlay file deleted; you're back to the PHP config defaults.
 
-## Optional: register a screenshot closure
+## Screenshots
 
-The `screenshot_catalogue` tool is optional. If you want visual feedback during AI iteration, register a closure on the plugin in your panel provider. The closure receives a one-time signed URL pointing at a bridge route which logs in the demo user and redirects to the requested catalogue page — your screenshot tool fetches the URL with any headless browser that follows redirects with cookies.
+The `screenshot_catalogue` tool drives a headless Chromium via Playwright by default. The MCP server signs a temporary URL pointing at a bridge route that logs in the demo user and redirects to the requested catalogue page; the bundled Node CLI navigates to it and writes a PNG.
+
+**Setup — one-time per project:**
+
+```bash
+npm install --save-dev playwright
+npx playwright install chromium
+```
+
+That's all. The package detects the Playwright install at runtime and the screenshot tool starts working. No custom closure, no host service, no AWS keys.
+
+### Override with a custom capture closure
+
+Hosts that prefer a different mechanism (hosted screenshot service, Puppeteer, AWS Lambda, etc.) can register their own closure on the plugin. It receives the same signed URL and should return either a base64 string or `['image' => '<base64>', 'mime' => 'image/png']`:
 
 ```php
 FilamentDesignSystemPlugin::make()
     ->screenshotCapture(function (string $url): ?array {
-        $captured = app(\App\Services\ScreenshotService::class)->capture($url, [
-            'viewport' => ['width' => 1280, 'height' => 800],
-            'fullPage' => true,
-        ]);
-
-        $body = @file_get_contents($captured['url'] ?? '');
-
-        return $body === false ? null : [
-            'image' => base64_encode($body),
-            'mime' => 'image/png',
-        ];
+        // your capture logic here, e.g. invoking a hosted service
+        return ['image' => $base64, 'mime' => 'image/png'];
     }),
 ```
 
-The closure should return either a base64 string or `['image' => '<base64>', 'mime' => 'image/png']`. Without it, the other tools still work — token edits just won't have visual confirmation.
+When a custom closure is registered it takes precedence over the Playwright default. Without either, the other tools (`read_tokens`, `write_tokens`, `write_theme_overrides`, …) still work — token edits just won't have visual confirmation, and `screenshot_catalogue` returns setup guidance.
 
 ## Refreshing the class manifest
 

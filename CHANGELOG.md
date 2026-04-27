@@ -4,6 +4,29 @@ All notable changes to `visualbuilder/filament-design-system` will be documented
 
 ## Unreleased
 
+### v0.6.0 — Playwright screenshot default + crash-safe tool
+
+- **Playwright as the default screenshot capture.** Package now ships a Node
+  CLI (`resources/scripts/screenshot.cjs`) and a PHP wrapper
+  (`Screenshot\PlaywrightCapture`) that drive headless Chromium against any
+  local URL — including self-signed HTTPS via `ignoreHTTPSErrors`. Hosts with
+  Playwright in their `node_modules` get a working screenshot loop without
+  registering a custom closure. Custom closures still take precedence when
+  registered. Setup: `npm install --save-dev playwright && npx playwright
+  install chromium`.
+- **`screenshot_catalogue` no longer crashes the MCP server on host errors.**
+  The closure invocation is wrapped in `try/catch`; thrown exceptions return
+  as a tool error, and host capture services that produce nothing return
+  graceful guidance instead of a stdio crash.
+- **PNG saved to disk + path returned as text.** Workaround for Laravel\Mcp's
+  unimplemented `Response::image()` in tool responses — writes to
+  `storage/app/design-system-screenshots/<timestamp>-<page>.png` and the AI
+  client reads via its native file-read tool. Will switch to inline image
+  content once upstream supports it.
+- **`setupGuidance()` rewritten** to recommend the Playwright install path
+  as canonical, with custom-closure registration as the advanced override.
+- **README** rewritten to position Playwright as the supported default.
+
 ### v0.5.0 — theme-overrides layer
 
 - **`write_theme_overrides` tool** — accepts a CSS string, validates (balanced

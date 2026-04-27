@@ -59,10 +59,20 @@ class ScreenshotCatalogue extends Tool
             ['page' => $page],
         );
 
-        $captured = ($plugin->getScreenshotCaptureCallback())($url);
+        try {
+            $captured = ($plugin->getScreenshotCaptureCallback())($url);
+        } catch (\Throwable $e) {
+            // Catch host-side failures so a misconfigured capture closure
+            // doesn't propagate up and kill the MCP connection.
+            return Response::error(sprintf(
+                'Screenshot closure threw %s: %s',
+                $e::class,
+                $e->getMessage(),
+            ));
+        }
 
         if ($captured === null) {
-            return Response::error('Screenshot closure returned null — the host capture service did not produce an image.');
+            return Response::error('Screenshot closure returned null — capture failed. Check your Playwright install (npx playwright install chromium) or the host-registered closure.');
         }
 
         [$base64, $mime] = $this->normalise($captured);
@@ -71,9 +81,25 @@ class ScreenshotCatalogue extends Tool
             return Response::error('Screenshot closure returned an unrecognised payload. Expected a base64 string or [\"image\" => base64, \"mime\" => \"image/png\"].');
         }
 
-        return Response::make([
-            Response::image()->base64($base64, $mime ?? 'image/png'),
-        ]);
+        // The MCP protocol supports inline image responses, but Laravel\Mcp\Response::image()
+        // is not implemented in this version of laravel/mcp. As a workaround we persist the
+        // PNG to a known location and return its path as text — the AI client can then read
+        // the file via its native file-read tool to "see" the screenshot. When upstream
+        // adds image-content support to Tool responses, swap this for Response::image().
+        $extension = $mime === 'image/jpeg' ? 'jpg' : 'png';
+        $directory = storage_path('app/design-system-screenshots');
+        @mkdir($directory, 0755, true);
+        $path = $directory . '/' . date('Ymd-His') . '-' . $page . '.' . $extension;
+
+        if (file_put_contents($path, base64_decode($base64, true)) === false) {
+            return Response::error("Failed to write screenshot to {$path}.");
+        }
+
+        return Response::text(
+            "Screenshot saved to: {$path}\n\n"
+            . "Read this path with your file-read tool to view the captured PNG. "
+            . "Older screenshots in this directory are not auto-pruned."
+        );
     }
 
     public function schema(JsonSchema $schema): array
@@ -125,21 +151,23 @@ class ScreenshotCatalogue extends Tool
     protected function setupGuidance(): string
     {
         return <<<'EOT'
-            No screenshot closure is registered on FilamentDesignSystemPlugin.
+            Screenshots are unavailable: Playwright is not installed in this project's node_modules, and no custom screenshot closure has been registered on FilamentDesignSystemPlugin.
 
-            To enable visual feedback, register a closure on the plugin in your DesignSystemPanelProvider that takes a URL and returns either a base64 image string or an array of the form ["image" => "<base64>", "mime" => "image/png"].
+            Recommended fix — install Playwright:
 
-            Example using a hypothetical capture service:
+                npm install --save-dev playwright
+                npx playwright install chromium
+
+            That's all most hosts need. The package will detect the install and use the bundled local-Chromium capture automatically.
+
+            Advanced override — register a custom closure (e.g. when using a hosted screenshot service):
 
                 FilamentDesignSystemPlugin::make()
                     ->screenshotCapture(function (string $url): ?array {
-                        return app(\App\Services\ScreenshotService::class)->capture($url, [
-                            'viewport' => ['width' => 1280, 'height' => 800],
-                            'fullPage' => true,
-                        ]);
+                        // return ['image' => '<base64>', 'mime' => 'image/png'] or null
                     }),
 
-            Without a closure, the rest of the MCP server (read_tokens, write_tokens) still works — token edits just won't have visual confirmation.
+            Without a working capture, the rest of the MCP server (read_tokens, write_tokens, write_theme_overrides) still works — token edits just won't have visual confirmation.
             EOT;
     }
 }

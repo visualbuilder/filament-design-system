@@ -10,6 +10,7 @@ use Filament\Enums\ThemeMode;
 use Filament\Panel;
 use Filament\Support\Concerns\EvaluatesClosures;
 use Visualbuilder\FilamentDesignSystem\Pages\Actions;
+use Visualbuilder\FilamentDesignSystem\Screenshot\PlaywrightCapture;
 use Visualbuilder\FilamentDesignSystem\Theme\Tokens;
 use Visualbuilder\FilamentDesignSystem\Pages\CardTables;
 use Visualbuilder\FilamentDesignSystem\Pages\Forms;
@@ -48,15 +49,17 @@ class FilamentDesignSystemPlugin implements Plugin
     }
 
     /**
-     * Configure how the package captures catalogue screenshots for the
+     * Override the default Playwright-based screenshot capture used by the
      * screenshot_catalogue MCP tool. The callback receives a fully-qualified
      * URL to a catalogue page and should return either a base64-encoded image
      * string or an array of the form
      *   ['image' => '<base64>', 'mime' => 'image/png']
      * Return null if capture failed.
      *
-     * The closure is *only* used by the MCP server; if you don't register one,
-     * the screenshot tool returns guidance describing how to wire it up.
+     * Most hosts won't need this — the package ships with a Playwright-driven
+     * default that runs locally and works against self-signed HTTPS. Register
+     * a custom closure when you want to use a different capture mechanism
+     * (hosted service, Puppeteer, AWS Lambda, etc.).
      */
     public function screenshotCapture(Closure $callback): static
     {
@@ -65,14 +68,27 @@ class FilamentDesignSystemPlugin implements Plugin
         return $this;
     }
 
+    /**
+     * Returns the active screenshot capture closure: the host-registered one
+     * if set, otherwise the Playwright default if available, otherwise null.
+     */
     public function getScreenshotCaptureCallback(): ?Closure
     {
-        return $this->screenshotCaptureCallback;
+        if ($this->screenshotCaptureCallback !== null) {
+            return $this->screenshotCaptureCallback;
+        }
+
+        if (PlaywrightCapture::isAvailable()) {
+            return PlaywrightCapture::callback();
+        }
+
+        return null;
     }
 
     public function hasScreenshotCapture(): bool
     {
-        return $this->screenshotCaptureCallback !== null;
+        return $this->screenshotCaptureCallback !== null
+            || PlaywrightCapture::isAvailable();
     }
 
     public function navigationGroup(string|Closure|null $group): static
