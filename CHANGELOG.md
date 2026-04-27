@@ -4,6 +4,26 @@ All notable changes to `visualbuilder/filament-design-system` will be documented
 
 ## Unreleased
 
+### v0.8.0 — global search demo resource
+
+- **`DesignSystemUserResource` registered on the panel**, with
+  `$shouldRegisterNavigation = false` so it doesn't add a sidebar item.
+  Its only purpose is to give the panel a globally-searchable resource so
+  Filament renders the topbar's global-search input — pink26 designers can
+  iterate on the search-pill chrome (rounded background, typography,
+  CTRL+K hint) without having to wire up a real model.
+- **Resource bypasses host policy stack.** `canViewAny()` / `canView()`
+  return true; `canCreate()` / `canEdit()` / `canDelete()` return false.
+  This skips Gate resolution that might otherwise call methods like
+  `hasRole()` on `DesignSystemUser` (which doesn't use Spatie HasRoles).
+  The resource is read-only by design.
+- **`DemoUserSeeder` seeds eight extra users** with varied names so global
+  search has demo data to surface. Hosts re-running the seeder on upgrade
+  get the new records via `updateOrCreate` (no duplicates).
+- **`globalSearchFieldSuffix()` is the missing piece** for the visible
+  CTRL+K hint — `globalSearchKeyBindings()` only registers the keyboard
+  shortcut. Both are documented in the published panel-provider stub.
+
 ### v0.7.0 — initials avatar component + light-mode parity for catalogue + theme switching in screenshots
 
 - **`<x-filament-design-system::avatar>` component.** Anonymous Blade component

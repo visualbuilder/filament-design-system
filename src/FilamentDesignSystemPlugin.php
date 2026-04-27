@@ -10,6 +10,7 @@ use Filament\Enums\ThemeMode;
 use Filament\Panel;
 use Filament\Support\Concerns\EvaluatesClosures;
 use Visualbuilder\FilamentDesignSystem\Pages\Actions;
+use Visualbuilder\FilamentDesignSystem\Resources\DesignSystemUserResource;
 use Visualbuilder\FilamentDesignSystem\Screenshot\PlaywrightCapture;
 use Visualbuilder\FilamentDesignSystem\Theme\Tokens;
 use Visualbuilder\FilamentDesignSystem\Pages\CardTables;
@@ -115,6 +116,15 @@ class FilamentDesignSystemPlugin implements Plugin
             Infolists::class,
             Icons::class,
             Widgets::class,
+        ]);
+
+        // The DesignSystemUserResource is hidden from sidebar navigation —
+        // its only purpose is to give the panel something globally
+        // searchable so Filament renders the topbar's global-search input
+        // (which is hidden when no searchable resources exist). This lets
+        // pink26 designers iterate on the search-pill chrome.
+        $panel->resources([
+            DesignSystemUserResource::class,
         ]);
 
         $panel->widgets([
