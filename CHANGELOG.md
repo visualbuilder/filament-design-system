@@ -4,6 +4,16 @@ All notable changes to `visualbuilder/filament-design-system` will be documented
 
 ## Unreleased
 
+### v0.10.1 — Welcome / Callout illustration polish
+
+- **Illustration badges transparent in light mode.** Welcome and Callout
+  components had a hardcoded dark badge bg that worked in dark mode but
+  rendered as a dark disc on a white surface in light. Now: transparent
+  in light, dark grey in dark (`:where(.dark, .dark *)` rule).
+- **Illustrations 30% larger.** Welcome badge 5rem → 6.5rem, icon 3rem
+  → 4rem. Callout badge 4rem → 5.25rem, icon 2.25rem → 3rem. More visible
+  hero presence per the designer's reference.
+
 ### v0.10.0 — Callout component + Welcome name from auth user
 
 - **`<x-filament-design-system::callout>` Blade component.** Horizontal pill

@@ -43,15 +43,21 @@
             position: relative;
         }
 
+        /* Badge: transparent in light mode (illustration sits on the card
+           directly); darker than the card bg in dark mode so the
+           pink-stroke illustration reads against the surrounding card. */
         .fi-ds-callout-badge {
             flex: 0 0 auto;
-            width: 4rem; height: 4rem;
+            width: 5.25rem; height: 5.25rem;
             border-radius: 9999px;
-            background-color: var(--gray-950, #0a0a0d);
+            background-color: transparent;
             display: flex; align-items: center; justify-content: center;
         }
+        .fi-ds-callout-badge:where(.dark, .dark *) {
+            background-color: var(--gray-950, #0a0a0d);
+        }
 
-        .fi-ds-callout-icon { width: 2.25rem; height: 2.25rem; color: #fff; }
+        .fi-ds-callout-icon { width: 3rem; height: 3rem; color: #fff; }
 
         .fi-ds-callout-body { flex: 1; min-width: 0; }
 

@@ -23,14 +23,20 @@
 <div {{ $attributes->class(['fi-ds-welcome-wrap']) }}>
     <style>
         .fi-ds-welcome { display: flex; align-items: center; gap: 1.5rem; padding-block: 0.5rem; }
+        /* Badge: transparent in light mode (illustration sits on the page
+           surface without a separate disc); dark grey in dark mode so the
+           pink-stroke illustration reads against the lighter page bg. */
         .fi-ds-welcome-badge {
-            flex: 0 0 auto; width: 5rem; height: 5rem;
+            flex: 0 0 auto; width: 6.5rem; height: 6.5rem;
             border-radius: 9999px;
-            background-color: var(--gray-900, #1a1a1f);
+            background-color: transparent;
             display: flex; align-items: center; justify-content: center;
             overflow: hidden;
         }
-        .fi-ds-welcome-icon { width: 3rem; height: 3rem; color: #fff; }
+        .fi-ds-welcome-badge:where(.dark, .dark *) {
+            background-color: var(--gray-900, #1a1a1f);
+        }
+        .fi-ds-welcome-icon { width: 4rem; height: 4rem; color: #fff; }
         .fi-ds-welcome-greeting {
             font-size: 2.5rem; font-weight: 200; line-height: 1;
             color: var(--primary-500, #d264ed);
