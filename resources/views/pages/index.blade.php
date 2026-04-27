@@ -62,7 +62,27 @@
             <x-filament-design-system::welcome
                 icon="wave"
                 greeting="Welcome"
-                name="Zoe Chadwick"
+                :name="filament()->auth()->user()?->full_name ?? 'Design Reviewer'"
+            />
+        </section>
+
+        {{-- Callout — pill card with leading icon, eyebrow label, title and
+             dismissible close button. Mirrors the "Upcoming Appointment"
+             pattern from the designer's reference. --}}
+        <section class="ds-section">
+            <header class="ds-section__head">
+                <div class="ds-section__title">Callout</div>
+                <div class="ds-section__sub">
+                    Horizontal pill card · leading illustration badge · eyebrow label · title · description · optional dismiss.
+                </div>
+            </header>
+
+            <x-filament-design-system::callout
+                icon="alarm-clock"
+                label="REMINDER"
+                title="Your Upcoming Appointment"
+                description="Appointment is at 10am on 13th April"
+                dismissible
             />
         </section>
 

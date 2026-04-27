@@ -28,7 +28,8 @@ The panel is the AI's test canvas. The MCP server is the AI's hands.
 - **v0.6** — Playwright as the default screenshot capture (no host closure required if `node_modules/playwright` is present). `screenshot_catalogue` wraps closure calls in try/catch so host bugs no longer crash the MCP connection. PNG saved to disk and path returned as text — works around Laravel\Mcp's unimplemented `Response::image()` for tool results.
 - **v0.7** — `<x-filament-design-system::avatar>` Blade component (initials on rounded bg, deterministic hue, CSP-safe). Catalogue migrated off `api.dicebear.com` for both initials and shapes — works out of the box on hosts with strict CSP (Beanstalk, etc.). `screenshot.cjs` accepts `--theme=light|dark|system` for light-mode iteration loops.
 - **v0.8** — `DesignSystemUserResource` (hidden from nav, read-only, policy-bypassing) registered on the panel so Filament renders the topbar's global-search input — designers can iterate on search chrome without wiring a real model. Eight extra demo users in `DemoUserSeeder` for richer search results.
-- **v0.9 (current)** — `<x-filament-design-system::welcome>` Blade component (circular illustration badge + light pink greeting + bolder user name). Catalogue Index page showcases it at the top for chrome iteration via the design-system MCP.
+- **v0.9** — `<x-filament-design-system::welcome>` Blade component (circular illustration badge + light pink greeting + bolder user name). Catalogue Index page showcases it at the top for chrome iteration via the design-system MCP.
+- **v0.10 (current)** — `<x-filament-design-system::callout>` Blade component (horizontal pill card with leading illustration badge, eyebrow label, title, optional description, optional Alpine-driven dismiss). Welcome hero now reads `$user->full_name` from the auth'd user.
 
 ## Installation
 

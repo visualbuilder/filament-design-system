@@ -4,6 +4,20 @@ All notable changes to `visualbuilder/filament-design-system` will be documented
 
 ## Unreleased
 
+### v0.10.0 — Callout component + Welcome name from auth user
+
+- **`<x-filament-design-system::callout>` Blade component.** Horizontal pill
+  card with leading illustration badge, eyebrow label, title, optional
+  description, and optional Alpine-driven dismiss button. Replicates the
+  "REMINDER / Your Upcoming Appointment" pattern from the designer's
+  reference. Self-contained styles inside a single root element. Hosts
+  pass any blade-icons name (e.g. `alarm-clock`, `bell`, etc.) via the
+  `icon` prop.
+- **Welcome hero now reads `$user->full_name` on the auth'd user** instead
+  of the demo-config name, with a 'Design Reviewer' fallback. Matches what
+  hosts will write in their own dashboards.
+- Catalogue Index page now showcases both Welcome and Callout side by side.
+
 ### v0.9.0 — Welcome hero component + catalogue showcase
 
 - **`<x-filament-design-system::welcome>` Blade component.** Renders the
