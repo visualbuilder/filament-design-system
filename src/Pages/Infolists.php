@@ -7,7 +7,7 @@ namespace Visualbuilder\FilamentDesignSystem\Pages;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Infolists\Components\ColorEntry;
 use Filament\Infolists\Components\IconEntry;
-use Filament\Infolists\Components\ImageEntry;
+use Filament\Infolists\Components\ViewEntry;
 use Filament\Infolists\Components\KeyValueEntry;
 use Filament\Infolists\Components\RepeatableEntry;
 use Filament\Infolists\Components\TextEntry;
@@ -185,16 +185,19 @@ class Infolists extends Page
                 Section::make('Image entry')
                     ->columns(2)
                     ->schema([
-                        ImageEntry::make('avatar')
+                        ViewEntry::make('avatar')
                             ->label('Avatar')
-                            ->state('https://api.dicebear.com/7.x/initials/svg?seed=Lee+Evans')
-                            ->circular()
-                            ->size(96),
+                            ->state('Lee Evans')
+                            ->view('filament-design-system::entries.avatar')
+                            ->extraAttributes(['data-avatar-size' => 'xl']),
 
-                        ImageEntry::make('cover')
+                        // Cover image rendered as an inline CSS gradient instead of
+                        // an external SVG fetch — keeps the catalogue CSP-safe and
+                        // avoids the dicebear /shapes API being blocked in prod.
+                        TextEntry::make('cover')
                             ->label('Cover image')
-                            ->state('https://api.dicebear.com/7.x/shapes/svg?seed=neurohub-cover&backgroundType=gradientLinear')
-                            ->extraAttributes(['style' => 'border-radius: 0.5rem; max-width: 280px;']),
+                            ->state('<div style="height:120px;max-width:280px;border-radius:0.5rem;background:linear-gradient(135deg,var(--primary-500),var(--primary-900));"></div>')
+                            ->html(),
                     ]),
             ]);
     }

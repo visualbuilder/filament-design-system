@@ -11,7 +11,7 @@ use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
-use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\ViewColumn;
 use Filament\Tables\Columns\Layout\Split;
 use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Columns\TextColumn;
@@ -101,12 +101,12 @@ class CardTables extends Page implements HasTable
             // content on the left, status badge to the right, and a row action.
             return [
                 Split::make([
-                    ImageColumn::make('avatar_url')
+                    ViewColumn::make('avatar')
                         ->label('Avatar')
-                        ->circular()
-                        ->size(56)
                         ->grow(false)
-                        ->defaultImageUrl(fn (array $record): string => 'https://api.dicebear.com/7.x/initials/svg?seed=' . urlencode($record['name'])),
+                        ->state(fn (array $record): string => (string) $record['name'])
+                        ->view('filament-design-system::columns.avatar')
+                        ->extraAttributes(['data-avatar-size' => 'lg']),
 
                     Stack::make([
                         TextColumn::make('name')
@@ -142,12 +142,12 @@ class CardTables extends Page implements HasTable
         // Two- and three-column cards use Stack — content centred vertically inside each card.
         return [
             Stack::make([
-                ImageColumn::make('avatar_url')
+                ViewColumn::make('avatar')
                     ->label('Avatar')
-                    ->circular()
-                    ->size(64)
                     ->alignCenter()
-                    ->defaultImageUrl(fn (array $record): string => 'https://api.dicebear.com/7.x/initials/svg?seed=' . urlencode($record['name'])),
+                    ->state(fn (array $record): string => (string) $record['name'])
+                    ->view('filament-design-system::columns.avatar')
+                    ->extraAttributes(['data-avatar-size' => 'xl']),
 
                 TextColumn::make('name')
                     ->label('Name')

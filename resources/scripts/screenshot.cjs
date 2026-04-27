@@ -27,11 +27,13 @@ const output = args[1];
 let viewport = '1366x768';
 let waitMs = 1500;
 let fullPage = true;
+let theme = null; // null = leave whatever localStorage already has
 
 for (const a of args.slice(2)) {
     if (a === '--no-full-page') fullPage = false;
     else if (/^\d+x\d+$/.test(a)) viewport = a;
     else if (/^\d+$/.test(a)) waitMs = parseInt(a, 10);
+    else if (/^--theme=(light|dark|system)$/.test(a)) theme = a.split('=')[1];
     else {
         console.error(`Unrecognised argument: ${a}`);
         process.exit(2);
@@ -56,7 +58,30 @@ try {
             ignoreHTTPSErrors: true,
         });
         const page = await context.newPage();
+
+        // Pre-seed localStorage so Filament's theme switcher reads the chosen
+        // mode on first paint instead of toggling after load (which would
+        // give us a transient flash of the wrong mode).
+        if (theme !== null) {
+            await page.addInitScript((t) => {
+                try { localStorage.setItem('theme', t); } catch (_) {}
+            }, theme);
+        }
+
         await page.goto(url, { waitUntil: 'networkidle', timeout: 30_000 });
+
+        // Belt-and-braces: enforce the dark-class state on <html> after load,
+        // since some boot scripts derive it from system pref or session.
+        if (theme !== null) {
+            await page.evaluate((t) => {
+                if (t === 'dark') document.documentElement.classList.add('dark');
+                else if (t === 'light') document.documentElement.classList.remove('dark');
+                else if (t === 'system') {
+                    const prefersDark = matchMedia?.('(prefers-color-scheme: dark)').matches ?? false;
+                    document.documentElement.classList.toggle('dark', prefersDark);
+                }
+            }, theme);
+        }
         if (waitMs > 0) await page.waitForTimeout(waitMs);
 
         // Hide common dev-time overlays so screenshots show only the design surface.

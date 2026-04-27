@@ -15,7 +15,7 @@ use Filament\Pages\Page;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\IconColumn;
-use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\ViewColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
@@ -49,10 +49,11 @@ class Tables extends Page implements HasTable
             ): LengthAwarePaginator => $this->orders($page, $recordsPerPage, $sortColumn, $sortDirection, $search, $filters))
             ->recordTitleAttribute('reference')
             ->columns([
-                ImageColumn::make('avatar_url')
+                ViewColumn::make('avatar')
                     ->label('Avatar')
-                    ->circular()
-                    ->defaultImageUrl(fn (array $record): string => 'https://api.dicebear.com/7.x/initials/svg?seed=' . urlencode($record['customer_name'])),
+                    ->state(fn (array $record): string => (string) $record['customer_name'])
+                    ->view('filament-design-system::columns.avatar')
+                    ->extraAttributes(['data-avatar-size' => 'lg']),
 
                 TextColumn::make('reference')
                     ->label('Reference')

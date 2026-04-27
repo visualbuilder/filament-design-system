@@ -25,7 +25,8 @@ The panel is the AI's test canvas. The MCP server is the AI's hands.
 - **v0.3.1** — overlay extended to `{ tokens, panel }`; panel chrome (font, brand, vite_theme, etc.) editable via MCP. Reset tool added.
 - **v0.4** — `generate_palette` (single hex → 11-shade ramp) and `set_brand_logo` (URL / data URI / path) tools.
 - **v0.5** — `write_theme_overrides` for component-level CSS the tokens layer can't reach. `list_classes` returns the actual `fi-*` / `ds-*` class manifest (extracted from the catalogue) so the AI doesn't hallucinate selectors. `export_theme_css` produces the CSS string for paste-into-`theme.css` graduation.
-- **v0.6 (current)** — Playwright as the default screenshot capture (no host closure required if `node_modules/playwright` is present). `screenshot_catalogue` wraps closure calls in try/catch so host bugs no longer crash the MCP connection. PNG saved to disk and path returned as text — works around Laravel\Mcp's unimplemented `Response::image()` for tool results.
+- **v0.6** — Playwright as the default screenshot capture (no host closure required if `node_modules/playwright` is present). `screenshot_catalogue` wraps closure calls in try/catch so host bugs no longer crash the MCP connection. PNG saved to disk and path returned as text — works around Laravel\Mcp's unimplemented `Response::image()` for tool results.
+- **v0.7 (current)** — `<x-filament-design-system::avatar>` Blade component (initials on rounded bg, deterministic hue, CSP-safe). Catalogue migrated off `api.dicebear.com` for both initials and shapes — works out of the box on hosts with strict CSP (Beanstalk, etc.). `screenshot.cjs` accepts `--theme=light|dark|system` for light-mode iteration loops.
 
 ## Installation
 

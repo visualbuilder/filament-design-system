@@ -4,6 +4,28 @@ All notable changes to `visualbuilder/filament-design-system` will be documented
 
 ## Unreleased
 
+### v0.7.0 — initials avatar component + light-mode parity for catalogue + theme switching in screenshots
+
+- **`<x-filament-design-system::avatar>` component.** Anonymous Blade component
+  that renders an initials-on-rounded-bg avatar — text and CSS only, no
+  external requests, CSP-safe. Deterministic hue from a hash of the seed
+  (same name → same colour). Sizes: `xs|sm|md|lg|xl`.
+- **Catalogue migrated off `api.dicebear.com`.** `Pages/CardTables`, `Pages/Tables`,
+  and `Pages/Infolists` previously used dicebear URLs as avatar fallbacks
+  via `ImageColumn::defaultImageUrl()` / `ImageEntry::state()`. Replaced
+  with `ViewColumn` / `ViewEntry` rendering the new component. The catalogue's
+  cover-image example also moved off dicebear's `/shapes` API to a CSS
+  gradient — keeps the panel CSP-safe out of the box on locked-down
+  hosts (Beanstalk, etc.).
+- **Two reusable views shipped alongside the component:**
+  `filament-design-system::columns.avatar` (for `ViewColumn`) and
+  `filament-design-system::entries.avatar` (for `ViewEntry`). Both honour
+  an `extraAttributes(['data-avatar-size' => 'lg'])` per use site.
+- **`screenshot.cjs` now accepts `--theme=light|dark|system`.** Pre-seeds
+  localStorage and forces the `dark` class on `<html>` so AI iteration
+  loops can verify light-mode rendering without manual user-menu toggling.
+  Useful when graduating a theme that needs to work in both modes.
+
 ### v0.6.0 — Playwright screenshot default + crash-safe tool
 
 - **Playwright as the default screenshot capture.** Package now ships a Node
