@@ -10,6 +10,7 @@ use Filament\Enums\ThemeMode;
 use Filament\Panel;
 use Filament\Support\Concerns\EvaluatesClosures;
 use Visualbuilder\FilamentDesignSystem\Pages\Actions;
+use Visualbuilder\FilamentDesignSystem\Pages\Animations;
 use Visualbuilder\FilamentDesignSystem\Resources\DesignSystemUserResource;
 use Visualbuilder\FilamentDesignSystem\Screenshot\PlaywrightCapture;
 use Visualbuilder\FilamentDesignSystem\Theme\Tokens;
@@ -106,7 +107,7 @@ class FilamentDesignSystemPlugin implements Plugin
 
     public function register(Panel $panel): void
     {
-        $panel->pages([
+        $pages = [
             Index::class,
             Forms::class,
             Layout::class,
@@ -116,7 +117,17 @@ class FilamentDesignSystemPlugin implements Plugin
             Infolists::class,
             Icons::class,
             Widgets::class,
-        ]);
+        ];
+
+        // Animations page is conditional — it hard-references the Lottie
+        // schema component from visualbuilder/lottie, which is an optional
+        // companion package (not a hard dep). When that package is installed
+        // alongside the design system, the catalogue gains the demo page.
+        if (class_exists(\Visualbuilder\Lottie\Components\Lottie::class)) {
+            $pages[] = Animations::class;
+        }
+
+        $panel->pages($pages);
 
         // The DesignSystemUserResource is hidden from sidebar navigation —
         // its only purpose is to give the panel something globally
