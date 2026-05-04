@@ -14,6 +14,16 @@ declare(strict_types=1);
 
 return [
     'demo_user' => [
+        // When true (default), the design-system panel:
+        //   - prefills the login form with the email/password below
+        //   - renders a "Demo credentials (pre-filled)" callout above the form
+        //
+        // Both behaviours suit a standalone demo install. Production hosts
+        // mounting the panel internally (e.g. for QA / screenshot review)
+        // should set this to false so real reviewers don't see seeded demo
+        // creds on their login form.
+        'enabled' => env('DESIGN_SYSTEM_DEMO_ENABLED', true),
+
         'name' => env('DESIGN_SYSTEM_DEMO_NAME', 'Design Reviewer'),
         'email' => env('DESIGN_SYSTEM_DEMO_EMAIL', 'designer@example.test'),
         'password' => env('DESIGN_SYSTEM_DEMO_PASSWORD', 'design-system'),

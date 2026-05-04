@@ -106,6 +106,13 @@ class FilamentDesignSystemServiceProvider extends PackageServiceProvider
                     return '';
                 }
 
+                // Opt-out via config('design-system.demo_user.enabled')
+                // — gated alongside the form prefill so the two stay in
+                // sync. Production hosts disable both at once.
+                if (! config('design-system.demo_user.enabled', true)) {
+                    return '';
+                }
+
                 return Blade::render('<x-filament-design-system::login-credentials-callout />');
             },
         );

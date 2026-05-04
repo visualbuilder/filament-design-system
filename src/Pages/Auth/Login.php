@@ -12,6 +12,13 @@ class Login extends BaseLogin
     {
         parent::mount();
 
+        // Prefill is opt-out via config('design-system.demo_user.enabled')
+        // — production / internal-tool hosts can set false to avoid
+        // surfacing seeded demo creds on the real login form.
+        if (! config('design-system.demo_user.enabled', true)) {
+            return;
+        }
+
         $this->form->fill([
             'email' => config('design-system.demo_user.email'),
             'password' => config('design-system.demo_user.password'),
