@@ -23,7 +23,7 @@
         "spatie/laravel-package-tools": "^1.16"
     },
     "suggest": {
-        "visualbuilder/lottie": "Adds the Animations catalogue page demonstrating the Lottie schema component."
+        "visualbuilder/filament-lottie": "Adds the Animations catalogue page demonstrating the Lottie schema component."
     },
     "require-dev": {
         "orchestra/testbench": "^9.0 || ^10.0",

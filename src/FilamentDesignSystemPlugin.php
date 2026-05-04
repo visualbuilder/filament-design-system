@@ -120,9 +120,10 @@ class FilamentDesignSystemPlugin implements Plugin
         ];
 
         // Animations page is conditional — it hard-references the Lottie
-        // schema component from visualbuilder/lottie, which is an optional
-        // companion package (not a hard dep). When that package is installed
-        // alongside the design system, the catalogue gains the demo page.
+        // schema component from visualbuilder/filament-lottie, which is an
+        // optional companion package (not a hard dep). When that package is
+        // installed alongside the design system, the catalogue gains the
+        // demo page.
         if (class_exists(\Visualbuilder\Lottie\Components\Lottie::class)) {
             $pages[] = Animations::class;
         }

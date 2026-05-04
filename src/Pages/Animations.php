@@ -13,12 +13,12 @@ use Illuminate\Support\HtmlString;
 use Visualbuilder\Lottie\Components\Lottie;
 
 /**
- * Lottie animations catalogue. Demonstrates the visualbuilder/lottie Schema
- * component with the most common triggers, alongside short usage notes.
+ * Lottie animations catalogue. Demonstrates the visualbuilder/filament-lottie
+ * Schema component with the most common triggers, alongside short usage notes.
  *
- * Only registered by FilamentDesignSystemPlugin when the visualbuilder/lottie
- * package is installed — this page hard-references its Lottie schema component
- * and would fatal otherwise.
+ * Only registered by FilamentDesignSystemPlugin when visualbuilder/filament-lottie
+ * is installed — this page hard-references its Lottie schema component and
+ * would fatal otherwise.
  */
 class Animations extends Page
 {
@@ -46,7 +46,7 @@ class Animations extends Page
 
     protected function introSection(): Section
     {
-        return Section::make('visualbuilder/lottie')
+        return Section::make('visualbuilder/filament-lottie')
             ->description('Lottie animations as a Filament Schema component and a Blade component, backed by @lottiefiles/dotlottie-wc.')
             ->schema([
                 Text::make(new HtmlString(
