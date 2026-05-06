@@ -36,7 +36,8 @@
             display: flex;
             align-items: center;
             gap: 1.25rem;
-            padding: 0.875rem 1.25rem 0.875rem 0.875rem;
+            padding-block: 0.875rem;
+            padding-inline: 0.875rem 1.25rem;
             border-radius: 9999px;
             background-color: var(--pink26-menu-bg, var(--gray-900, #1a1a1f));
             box-shadow: var(--pink26-menu-shadow, 0 4px 24px rgb(0 0 0 / 0.25));
@@ -59,7 +60,7 @@
 
         .fi-ds-callout-icon { width: 3rem; height: 3rem; color: #fff; }
 
-        .fi-ds-callout-body { flex: 1; min-width: 0; }
+        .fi-ds-callout-body { flex: 1; min-width: 90%; }
 
         .fi-ds-callout-label {
             font-size: 0.6875rem;
@@ -101,6 +102,14 @@
         }
 
         .fi-ds-callout-dismiss svg { width: 1rem; height: 1rem; }
+
+        @media (max-width: 640px) {
+            .fi-ds-callout {
+                border-radius: 4rem;
+                gap: 0.875rem;
+                padding-block: 1rem;
+            }
+        }
     </style>
 
     <div class="fi-ds-callout">
