@@ -60,7 +60,7 @@
 
         .fi-ds-callout-icon { width: 3rem; height: 3rem; color: #fff; }
 
-        .fi-ds-callout-body { flex: 1; min-width: 90%; }
+        .fi-ds-callout-body { flex: 1; min-width: 90%; padding-inline-end: 1rem;}
 
         .fi-ds-callout-label {
             font-size: 0.6875rem;
@@ -105,14 +105,59 @@
 
         @media (max-width: 640px) {
             .fi-ds-callout {
-                border-radius: 4rem;
-                gap: 0.875rem;
-                padding-block: 1rem;
+                display: grid;
+                align-items: start;
+                gap: 0.75rem;
+                border-radius: 2.75rem;
+                padding: 1.5rem;
+            }
+
+            .fi-ds-callout-dismissible {
+                grid-template-columns: auto 1fr auto;
+            }
+
+            .fi-ds-callout-no-dismiss {
+                grid-template-columns: auto 1fr;
+            }
+
+            .fi-ds-callout-badge {
+                grid-column: 1;
+                grid-row: 1;
+
+                width: 2.5rem;
+                height: 2.5rem;
+            }
+
+            .fi-ds-callout-body {
+                display: contents;
+            }
+
+            .fi-ds-callout-label {
+                grid-column: 2;
+                grid-row: 1;
+                margin-bottom: 0;
+                align-self: center;
+            }
+
+            .fi-ds-callout-main {
+                grid-column: 1 / -1;
+                grid-row: 2;
+                padding-inline: 0.5rem;
+            }
+
+            .fi-ds-callout-dismiss {
+                width: 1.75rem;
+                height: 1.75rem;
+                grid-column: 3;
+                grid-row: 1;
+                position: static;
+                justify-self: end;
+                align-self: center;
             }
         }
     </style>
 
-    <div class="fi-ds-callout">
+    <div class="fi-ds-callout {{ $dismissible ? 'fi-ds-callout-dismissible' : 'fi-ds-callout-no-dismiss' }}">
         <div class="fi-ds-callout-badge">
             @svg($icon, 'fi-ds-callout-icon')
         </div>
@@ -121,10 +166,14 @@
             @if ($label)
                 <div class="fi-ds-callout-label">{{ $label }}</div>
             @endif
-            <div class="fi-ds-callout-title">{{ $title }}</div>
-            @if ($description)
-                <div class="fi-ds-callout-description">{{ $description }}</div>
-            @endif
+
+            <div class="fi-ds-callout-main">
+                <div class="fi-ds-callout-title">{{ $title }}</div>
+
+                @if ($description)
+                    <div class="fi-ds-callout-description">{{ $description }}</div>
+                @endif
+            </div>
         </div>
 
         @if ($dismissible)
