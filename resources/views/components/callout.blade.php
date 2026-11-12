@@ -60,7 +60,7 @@
 
         .fi-ds-callout-icon { width: 3rem; height: 3rem; color: #fff; }
 
-        .fi-ds-callout-body { flex: 1; min-width: 90%; padding-inline-end: 1rem;}
+        .fi-ds-callout-body { flex: 1; min-width: 0; padding-inline-end: 1rem; }
 
         .fi-ds-callout-label {
             font-size: 0.6875rem;
@@ -70,6 +70,26 @@
             color: var(--primary-500, #d264ed);
             margin-bottom: 0.125rem;
         }
+
+        /* Dark mode: primary-300 keeps this small label above 4.5:1 on a
+           host theme whose dark card is #2A2A2A; primary-400 measures
+           4.25:1 there. */
+        .fi-ds-callout-label:where(.dark, .dark *) {
+            color: var(--primary-300, #dc8aff);
+        }
+
+        /* fi-high-contrast is a class a host app may set on <html>. A host
+           high contrast dark theme can map primary-300 to olive (3.42:1 on
+           its card), so the label uses primary-400 there. The rule does
+           nothing when the class is absent. */
+        html.fi-high-contrast.dark .fi-ds-callout-label {
+            color: var(--primary-400, #cccc00);
+        }
+
+        /* Let long titles and details wrap inside the card instead of
+           widening it; min-width: 0 also covers the mobile grid layout,
+           where .fi-ds-callout-main is a grid item. */
+        .fi-ds-callout-main { min-width: 0; overflow-wrap: break-word; }
 
         .fi-ds-callout-title {
             font-size: 1.125rem;

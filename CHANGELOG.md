@@ -4,6 +4,14 @@ All notable changes to `visualbuilder/filament-design-system` will be documented
 
 ## Unreleased
 
+### 5.1.3 — Callout overflow and dark label contrast
+
+- **Long callout text wraps inside the card.** `.fi-ds-callout-body` drops
+  `min-width: 90%` for `min-width: 0`, and `.fi-ds-callout-main` sets
+  `min-width: 0; overflow-wrap: break-word;`.
+- **Readable dark label.** The callout label uses `--primary-300` in dark
+  mode, and `--primary-400` when the host sets `fi-high-contrast` on `<html>`.
+
 ### v0.10.1 — Welcome / Callout illustration polish
 
 - **Illustration badges transparent in light mode.** Welcome and Callout
